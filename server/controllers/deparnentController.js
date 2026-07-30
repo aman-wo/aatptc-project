@@ -45,6 +45,7 @@ const getDepartments = (req, res) => {
                                                                   
 
                                                                                                                                                                           const createDepartment = (req, res) => {
+                                                                                                                                                                            console.log(req.admin)
                                                                                                                                                                               const { name, slug } = req.body;
 
                                                                                                                                                                               if (!name || !slug) {
