@@ -7,7 +7,7 @@ const validateDepartment = require("../validation/departmentValidation");
 
 const {
   getDepartments,getDepartment, createDepartment, updateDepartment, deleteDepartment
-  } = require("../controllers/deparnentController.js");
+  } = require("../controllers/departmentController.js");
 
   router.get("/", getDepartments);
   router.get("/:slug", getDepartment);
