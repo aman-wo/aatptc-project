@@ -5,6 +5,7 @@ const departmentRoutes = require("./routes/departmentRoutes.js");
 const authRoutes = require("./routes/authRoutes");
 const newsRoutes = require("./routes/newsRoutes.js");
 const programRoutes = require("./routes/programRoutes");
+const eventRoutes = require("./routes/eventRoutes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/api/departments", departmentRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/programs", programRoutes);
+app.use("/api/events", eventRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
