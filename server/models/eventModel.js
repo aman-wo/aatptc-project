@@ -62,9 +62,52 @@ const getEventBySlug = (slug, callback) => {
     };
   
                 
+
+    const updateEvent = (slug, event, callback) => {
+        const sql = `
+            UPDATE events
+                SET
+                      title = ?,
+                            description = ?,
+                                  start_date = ?,
+                                        end_date = ?,
+                                              location = ?,
+                                                    organizer = ?,
+                                                          registration_link = ?,
+                                                                image = ?,
+                                                                      status = ?
+                                                                          WHERE slug = ?
+                                                                            `;
+
+                                                                              db.query(
+                                                                                  sql,
+                                                                                      [
+                                                                                            event.title,
+                                                                                                  event.description,
+                                                                                                        event.start_date,
+                                                                                                              event.end_date,
+                                                                                                                    event.location,
+                                                                                                                          event.organizer,
+                                                                                                                                event.registration_link,
+                                                                                                                                      event.image || null,
+                                                                                                                                            event.status,
+                                                                                                                                                  slug,
+                                                                                                                                                      ],
+                                                                                                                                                          callback
+                                                                                                                                                            );
+                                                                                                                                                            };
+
+                                                                                                                                                            const deleteEvent = (slug, callback) => {
+                                                                                                                                                              const sql = "DELETE FROM events WHERE slug = ?";
+
+                                                                                                                                                                db.query(sql, [slug], callback);
+                                                                                                                                                                };
+
+                                                                  
+    
                     module.exports = {
                         getAllEvents,
                           getEventBySlug,
-                            createEvent
+                            createEvent, updateEvent, deleteEvent
                             };
                     
