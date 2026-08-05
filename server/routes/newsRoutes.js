@@ -12,6 +12,7 @@ const {
           const verifyToken = require("../middleware/authMiddleware");
           const isAdmin = require("../middleware/adminMiddleware");
           const validateNews = require("../validation/newsValidation");
+          const upload = require("../middleware/uploadMiddleware");
 
 
           router.get("/", getNews);
@@ -22,6 +23,7 @@ const {
             "/",
               verifyToken,
                 isAdmin,
+                upload.single("image"),
                   validateNews,
                     createNews
                     );

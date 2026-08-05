@@ -41,7 +41,15 @@ const getSingleNews = (req, res) => {
                                                                                                         });
                                                                                                         };
                                                                                                         const createNews = (req, res) => {
-                                                                                                              News.createNews(req.body, (err, result) => {
+                                                                                                            const image = req.file
+                                                                                                              ? req.file.filename
+                                                                                                                : null;
+                                                                                                                const news = {
+                                                                                                                    ...req.body,
+                                                                                                                      image,
+                                                                                                                      };
+                                                                                                                }
+                                                                                                              News.createNews(news, (err, result) => {
                                                                                                                   if (err) {
                                                                                                                         return res.status(500).json({
                                                                                                                                 success: false,
@@ -55,7 +63,8 @@ const getSingleNews = (req, res) => {
                                                                                                                                                                         id: result.insertId,
                                                                                                                                                                             });
                                                                                                                                                                               });
-                                                                                                                                                                              };
+                                                                                                                                                                              
+
                                                                                                       
 const updateNews = (req, res) => {
         const { slug } = req.params;
