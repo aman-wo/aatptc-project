@@ -1,28 +1,32 @@
 const multer = require("multer");
 const path = require("path");
 
-const storage = multer.diskStorage({
+const createUpload = (folder) => {
 
-  destination: (req, file, cb) => {
+  const storage = multer.diskStorage({
 
-      cb(null, "uploads/news");
+      destination: (req, file, cb) => {
 
-        },
+            cb(null, `uploads/${folder}`);
 
-          filename: (req, file, cb) => {
+                },
 
-              const uniqueName =
-                    Date.now() +
-                          path.extname(file.originalname);
+                    filename: (req, file, cb) => {
 
-                              cb(null, uniqueName);
+                          const uniqueName =
+                                  Date.now() +
+                                          path.extname(file.originalname);
 
-                                }
+                                                cb(null, uniqueName);
 
-                                });
+                                                    }
 
-                                const upload = multer({
-                                  storage,
-                                  });
+                                                      });
 
-                                  module.exports = upload;
+                                                        return multer({
+                                                            storage,
+                                                              });
+
+                                                              };
+
+                                                              module.exports = createUpload;

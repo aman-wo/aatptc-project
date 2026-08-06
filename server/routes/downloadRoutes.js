@@ -1,6 +1,7 @@
 const express=require("express");
 const router=express.Router();
-
+const createUpload = require("../middleware/uploadMiddleware");
+const uploadDownload = createUpload("downloads");
 
 const {
 getDownloads,
@@ -25,6 +26,7 @@ router.post(
 "/",
 verifyToken,
 isAdmin,
+uploadDownload.single("file"),
 validateDownload,
 createDownload
 );

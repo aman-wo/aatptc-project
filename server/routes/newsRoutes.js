@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const createUpload = require("../middleware/uploadMiddleware");
+const uploadNews = createUpload("news");
 
 const {
   getNews,
@@ -23,7 +25,7 @@ const {
             "/",
               verifyToken,
                 isAdmin,
-                upload.single("image"),
+                uploadNews.single("image"),
                   validateNews,
                     createNews
                     );

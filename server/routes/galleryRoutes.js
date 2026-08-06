@@ -1,6 +1,8 @@
 const express=require("express");
 const router=express.Router();
 const validateGallery = require("../validation/galleryValidation")
+const createUpload = require("../middleware/uploadMiddleware");
+const uploadGallery = createUpload("gallery");
 
 const {
 getGalleries,
@@ -23,6 +25,7 @@ router.post(
 "/",
 verifyToken,
 isAdmin,
+uploadGallery.single("image"),
 validateGallery,
 createGallery
 );

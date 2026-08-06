@@ -1,21 +1,27 @@
 const News = require("../models/newsModel");
 
-const getNews = (req, res) => {
-  News.getAllNews((err, results) => {
-      if (err) {
-            return res.status(500).json({
-                    success: false,
-                            message: err.message,
-                                  });
-                                      }
 
-                                          res.json({
-                                                success: true,
-                                                      count: results.length,
-                                                            data: results,
-                                                                });
-                                                                  });
-                                                                  };
+getNews = (req, res) => {
+
+          const page = parseInt(req.query.page) || 1;
+              const limit = parseInt(req.query.limit) || 10;
+                  const search = req.query.search || "";
+                      const sort = req.query.sort || "created_at";
+                          const order = req.query.order || "DESC";
+
+                              News.getAllNews(page, limit, search, sort, order, (err, results) => {
+
+                                      if (err) {
+                                                  return res.status(500).json(err);
+                                                          }
+
+                                                                  res.json(results);
+
+                                                                      });
+
+                                                                      };
+
+
 const getSingleNews = (req, res) => {
         const { slug } = req.params;
 
@@ -48,7 +54,7 @@ const getSingleNews = (req, res) => {
                                                                                                                     ...req.body,
                                                                                                                       image,
                                                                                                                       };
-                                                                                                                }
+                                                                                                                
                                                                                                               News.createNews(news, (err, result) => {
                                                                                                                   if (err) {
                                                                                                                         return res.status(500).json({
@@ -63,7 +69,7 @@ const getSingleNews = (req, res) => {
                                                                                                                                                                         id: result.insertId,
                                                                                                                                                                             });
                                                                                                                                                                               });
-                                                                                                                                                                              
+                                                                                                                                                                        };
 
                                                                                                       
 const updateNews = (req, res) => {

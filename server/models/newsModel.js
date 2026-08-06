@@ -1,14 +1,25 @@
 const db = require("../config/database.js");
 
-const getAllNews = (callback) => {
-  const sql = `
-      SELECT *
-          FROM news
-              ORDER BY created_at DESC
-                `;
+getAllNews = (page, limit, search, sort, order, callback) => {
 
-                  db.query(sql, callback);
-                  };
+      const offset = (page - 1) * limit;
+
+          const sql = `
+                  SELECT *
+                          FROM news
+                                  WHERE title LIKE ?
+                                          ORDER BY ${sort} ${order}
+                                                  LIMIT ? OFFSET ?
+                                                      `;
+
+                                                          db.query(
+                                                                  sql,
+                                                                          [`%${search}%`, limit, offset],
+                                                                                  callback
+                                                                                      );
+
+                                                                                      };
+
 
 const getNewsBySlug = (slug, callback) => {
     const sql = "SELECT * FROM news WHERE slug = ?";

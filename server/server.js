@@ -13,6 +13,7 @@ const downloadRoutes = require("./routes/downloadRoutes");
 const announcementRoutes = require("./routes/announcementRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const path = require("path");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/gallery", galleryRoutes);
 app.use("/api/downloads", downloadRoutes);
 app.use("/api/announcements", announcementRoutes);
 app.use("/api/contacts", contactRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 app.use(
   "/uploads",

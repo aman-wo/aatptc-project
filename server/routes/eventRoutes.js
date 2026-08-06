@@ -1,5 +1,7 @@
 const express=require("express");
 const router=express.Router();
+const createUpload = require("../middleware/uploadMiddleware");
+const uploadEvent = createUpload("events");
 
 
 const {
@@ -23,6 +25,7 @@ router.post(
   "/",
     verifyToken,
       isAdmin,
+      uploadEvent.single("image"),
         validateEvent,
           createEvent
           );
