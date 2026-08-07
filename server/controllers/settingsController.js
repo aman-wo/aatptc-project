@@ -1,13 +1,22 @@
 const Settings = require("../models/settingsModel");
 
-getSettings = (req, res) => {
-            res.json({
-                    message: "Settings controller is working"
-                        });
-                        };
+const getSettings = (req, res) => {
+
+            Settings.getSettings((err, results) => {
+
+                    if (err) {
+                                return res.status(500).json(err);
+                                        }
+
+                                                res.json(results[0]);
+
+                                                    });
+
+                                                    };
 
 
-                                            updateSettings = (req, res) => {
+
+                                           const updateSettings = (req, res) => {
 
                                                 Settings.updateSettings(req.body, (err, results) => {
 

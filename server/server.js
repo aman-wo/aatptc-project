@@ -14,7 +14,7 @@ const announcementRoutes = require("./routes/announcementRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const path = require("path");
 const dashboardRoutes = require("./routes/dashboardRoutes.js")
-const settingsRoutes = require("./routes/staffRoutes.js");
+const settingsRoutes = require("./routes/settingsRoutes.js");
 
 const app = express();
 

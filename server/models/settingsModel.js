@@ -1,7 +1,7 @@
 const db = require("../config/database");
-const { getSettings, updateSettings } = require("../controllers/settingsController");
 
-getSettings = (callback) => {
+
+const getSettings = (callback) => {
 
         const sql = `
                 SELECT *
@@ -13,7 +13,7 @@ getSettings = (callback) => {
 
                                         };
 
-updateSettings = (settings, callback) => {
+const updateSettings = (settings, callback) => {
 
             const sql = `
                     UPDATE settings
