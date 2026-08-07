@@ -13,7 +13,8 @@ const downloadRoutes = require("./routes/downloadRoutes");
 const announcementRoutes = require("./routes/announcementRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const path = require("path");
-const dashboardRoutes = require("./routes/dashboardRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes.js")
+const settingsRoutes = require("./routes/staffRoutes.js");
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.use("/api/downloads", downloadRoutes);
 app.use("/api/announcements", announcementRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-
+app.use("/api/settings", settingsRoutes);
 app.use(
   "/uploads",
     express.static(
