@@ -12,7 +12,7 @@ const verifyToken=require("../middleware/authMiddleware");
 
 const isAdmin=require("../middleware/adminMiddleware");
 
-router.get("/", verifyToken, isAdmin, getStaff);
+router.get("/", getStaff);
 router.get("/:id", verifyToken, isAdmin, getSingleStaff);
 router.post("/", verifyToken, isAdmin, uploadStaff.single("image"), createStaff);
 router.put("/:id", verifyToken, isAdmin, updateStaff);
