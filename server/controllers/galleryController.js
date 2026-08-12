@@ -1,3 +1,4 @@
+
 const gallery = require("../models/galleryModel");
 
 const getGalleries = (req, res) => {
@@ -43,7 +44,12 @@ const getGalleries = (req, res) => {
                                                                                                                                                                     };
 
                                                                                                                                                                     const createGallery = (req, res) => {
-                                                                                                                                                                      gallery.createGallery(req.body, (err, result) => {
+                                                                                                                                                                        const galleryData = {
+                                                                                                                                                                                  ...req.body,
+                                                                                                                                                                                      image: req.file ? req.file.filename : null,
+                                                                                                                                                                                        };
+                                                                                                                                                                        
+                                                                                                                                                                      gallery.createGallery(galleryData, (err, result) => {
                                                                                                                                                                           if (err) {
                                                                                                                                                                                 return res.status(500).json({
                                                                                                                                                                                         success: false,

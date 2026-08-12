@@ -8,6 +8,8 @@ import MainLayout from "./layouts/MainLayout";
 import Departments from "./pages/Departments";
 import Programs from "./pages/Programs";
 import Events from "./pages/Events";
+import Staff from "./pages/Staff";
+import Gallery from "./pages/Gallery";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -34,7 +36,8 @@ function App() {
                                 <Route path="/programs" element={<Programs />} />
 
                                 <Route path="/events" element={<Events />} />
-                            
+                            <Route path="/staff" element={<Staff />} />
+                            <Route path="/gallery" element={<Gallery />} />
                                     
                                     
                                             <Route path="/news" element={<News />} />

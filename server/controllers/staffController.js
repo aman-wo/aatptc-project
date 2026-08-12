@@ -43,21 +43,27 @@ const getStaff = (req, res) => {
                                                                                                                                                                     };
 
                                                                                                                                                                     const createStaff = (req, res) => {
-                                                                                                                                                                      Staff.createStaff(req.body, (err, result) => {
-                                                                                                                                                                          if (err) {
-                                                                                                                                                                                return res.status(500).json({
-                                                                                                                                                                                        success: false,
-                                                                                                                                                                                                message: err.message,
-                                                                                                                                                                                                      });
-                                                                                                                                                                                                          }
+                                                                                                                                                                          const staffData = {
+                                                                                                                                                                              ...req.body,
+                                                                                                                                                                                  image: req.file ? req.file.filename : null,
+                                                                                                                                                                                    };
 
-                                                                                                                                                                                                              res.status(201).json({
-                                                                                                                                                                                                                    success: true,
-                                                                                                                                                                                                                          message: "Staff member created successfully",
-                                                                                                                                                                                                                                id: result.insertId,
-                                                                                                                                                                                                                                    });
-                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                      };
+                                                                                                                                                                                      Staff.createStaff(staffData, (err, result) => {
+                                                                                                                                                                                          if (err) {
+                                                                                                                                                                                                return res.status(500).json({
+                                                                                                                                                                                                        success: false,
+                                                                                                                                                                                                                message: err.message,
+                                                                                                                                                                                                                      });
+                                                                                                                                                                                                                          }
+
+                                                                                                                                                                                                                              res.status(201).json({
+                                                                                                                                                                                                                                    success: true,
+                                                                                                                                                                                                                                          message: "Staff member created successfully",
+                                                                                                                                                                                                                                                id: result.insertId,
+                                                                                                                                                                                                                                                    });
+                                                                                                                                                                                                                                                      });
+                                                                                                                                                                                                                                                      };
+                                                                                                                                                                    
 
                                                                                                                                                                                                                                       const updateStaff = (req, res) => {
                                                                                                                                                                                                                                         const { id } = req.params;
