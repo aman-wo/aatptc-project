@@ -10,6 +10,8 @@ import Programs from "./pages/Programs";
 import Events from "./pages/Events";
 import Staff from "./pages/Staff";
 import Gallery from "./pages/Gallery";
+import Downloads from "./pages/Downloads";
+import Announcements from "./pages/Announcements";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -38,6 +40,11 @@ function App() {
                                 <Route path="/events" element={<Events />} />
                             <Route path="/staff" element={<Staff />} />
                             <Route path="/gallery" element={<Gallery />} />
+                            <Route path="/downloads" element={<Downloads />} />
+                            <Route
+                              path="/announcements"
+                                element={<Announcements />}
+                                />
                                     
                                     
                                             <Route path="/news" element={<News />} />
