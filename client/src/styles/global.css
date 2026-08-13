@@ -1,14 +1,254 @@
-* {
-      margin: 0;
-        padding: 0;
-          box-sizing: border-box;
-          }
+/* ========================================
+   AATPTC GLOBAL DESIGN SYSTEM
+      ======================================== */
 
-          body {
-            font-family: Arial, sans-serif;
-              line-height: 1.6;
-              }
+      /* ---------- CSS Variables ---------- */
 
-              a {
-                text-decoration: none;
-                }
+      :root {
+        --primary-color: #0b3d91;
+          --primary-dark: #082f70;
+            --primary-light: #eaf1fb;
+
+              --secondary-color: #f4b400;
+                --secondary-dark: #d99d00;
+
+                  --text-color: #222222;
+                    --text-light: #666666;
+
+                      --white: #ffffff;
+                        --background-color: #f7f9fc;
+                          --border-color: #dddddd;
+
+                            --success-color: #198754;
+                              --error-color: #dc3545;
+
+                                --container-width: 1200px;
+
+                                  --section-padding: 70px 20px;
+
+                                    --border-radius: 8px;
+
+                                      --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+                                        --transition: 0.3s ease;
+                                        }
+
+
+                                        /* ---------- Global Reset ---------- */
+
+                                        * {
+                                          margin: 0;
+                                            padding: 0;
+                                              box-sizing: border-box;
+                                              }
+
+
+                                              /* ---------- HTML & Body ---------- */
+
+                                              html {
+                                                scroll-behavior: smooth;
+                                                }
+
+                                                body {
+                                                  font-family: Arial, sans-serif;
+                                                    line-height: 1.6;
+                                                      color: var(--text-color);
+                                                        background-color: var(--background-color);
+                                                        }
+
+
+                                                        /* ---------- Images ---------- */
+
+                                                        img {
+                                                          max-width: 100%;
+                                                            display: block;
+                                                            }
+
+
+                                                            /* ---------- Links ---------- */
+
+                                                            a {
+                                                              color: inherit;
+                                                                text-decoration: none;
+                                                                }
+
+
+                                                                /* ---------- Buttons ---------- */
+
+                                                                button {
+                                                                  font-family: inherit;
+                                                                    cursor: pointer;
+                                                                    }
+
+
+                                                                    /* ---------- Common Container ---------- */
+
+                                                                    .container {
+                                                                      width: 100%;
+                                                                        max-width: var(--container-width);
+                                                                          margin: 0 auto;
+                                                                            padding: 0 20px;
+                                                                            }
+
+
+                                                                            /* ---------- Common Section ---------- */
+
+                                                                            .section {
+                                                                              padding: var(--section-padding);
+                                                                              }
+
+
+                                                                              /* ---------- Section Heading ---------- */
+
+                                                                              .section-title {
+                                                                                margin-bottom: 15px;
+                                                                                  text-align: center;
+                                                                                  }
+
+                                                                                  .section-description {
+                                                                                    max-width: 700px;
+                                                                                      margin: 0 auto 40px;
+                                                                                        text-align: center;
+                                                                                          color: var(--text-light);
+                                                                                          }
+
+
+                                                                                          /* ---------- Primary Button ---------- */
+
+                                                                                          .btn-primary {
+                                                                                            display: inline-block;
+                                                                                              padding: 12px 24px;
+                                                                                                border: none;
+                                                                                                  border-radius: var(--border-radius);
+                                                                                                    background-color: var(--primary-color);
+                                                                                                      color: var(--white);
+                                                                                                        font-size: 16px;
+                                                                                                          font-weight: 600;
+                                                                                                            transition: var(--transition);
+                                                                                                            }
+
+                                                                                                            .btn-primary:hover {
+                                                                                                              background-color: var(--primary-dark);
+                                                                                                              }
+
+
+                                                                                                              /* ---------- Secondary Button ---------- */
+
+                                                                                                              .btn-secondary {
+                                                                                                                display: inline-block;
+                                                                                                                  padding: 12px 24px;
+                                                                                                                    border: 2px solid var(--primary-color);
+                                                                                                                      border-radius: var(--border-radius);
+                                                                                                                        background-color: transparent;
+                                                                                                                          color: var(--primary-color);
+                                                                                                                            font-size: 16px;
+                                                                                                                              font-weight: 600;
+                                                                                                                                transition: var(--transition);
+                                                                                                                                }
+
+                                                                                                                                .btn-secondary:hover {
+                                                                                                                                  background-color: var(--primary-color);
+                                                                                                                                    color: var(--white);
+                                                                                                                                    }
+
+
+                                                                                                                                    /* ---------- Responsive Container ---------- */
+
+                                                                                                                                    @media (max-width: 768px) {
+                                                                                                                                      :root {
+                                                                                                                                          --section-padding: 50px 15px;
+                                                                                                                                            }
+
+                                                                                                                                              .container {
+                                                                                                                                                  padding: 0 15px;
+                                                                                                                                                    }
+                                                                                                                                                    }
+
+
+                                                                                                                                                    /* ========================================
+                                                                                                                                                       NAVBAR
+                                                                                                                                                          ======================================== */
+
+                                                                                                                                                          .navbar {
+                                                                                                                                                            background-color: var(--white);
+                                                                                                                                                              border-bottom: 1px solid var(--border-color);
+                                                                                                                                                                position: sticky;
+                                                                                                                                                                  top: 0;
+                                                                                                                                                                    z-index: 1000;
+                                                                                                                                                                    }
+
+                                                                                                                                                                    .navbar-container {
+                                                                                                                                                                      min-height: 70px;
+                                                                                                                                                                        display: flex;
+                                                                                                                                                                          align-items: center;
+                                                                                                                                                                            justify-content: space-between;
+                                                                                                                                                                            }
+
+                                                                                                                                                                            .navbar-brand {
+                                                                                                                                                                              color: var(--primary-color);
+                                                                                                                                                                                font-size: 24px;
+                                                                                                                                                                                  font-weight: 700;
+                                                                                                                                                                                  }
+
+                                                                                                                                                                                  .navbar-links {
+                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                      align-items: center;
+                                                                                                                                                                                        gap: 20px;
+                                                                                                                                                                                        }
+
+                                                                                                                                                                                        .navbar-links a {
+                                                                                                                                                                                          color: var(--text-color);
+                                                                                                                                                                                            font-weight: 500;
+                                                                                                                                                                                              transition: var(--transition);
+                                                                                                                                                                                              }
+
+                                                                                                                                                                                              .navbar-links a:hover {
+                                                                                                                                                                                                color: var(--primary-color);
+                                                                                                                                                                                                }
+
+                                                                                                                                                                                                .navbar-toggle {
+                                                                                                                                                                                                  display: none;
+                                                                                                                                                                                                    border: none;
+                                                                                                                                                                                                      background: transparent;
+                                                                                                                                                                                                        font-size: 28px;
+                                                                                                                                                                                                          color: var(--primary-color);
+                                                                                                                                                                                                          }
+
+
+                                                                                                                                                                                                          /* ---------- Mobile Navbar ---------- */
+
+                                                                                                                                                                                                          @media (max-width: 768px) {
+                                                                                                                                                                                                            .navbar-container {
+                                                                                                                                                                                                                position: relative;
+                                                                                                                                                                                                                  }
+
+                                                                                                                                                                                                                    .navbar-toggle {
+                                                                                                                                                                                                                        display: block;
+                                                                                                                                                                                                                          }
+
+                                                                                                                                                                                                                            .navbar-links {
+                                                                                                                                                                                                                                display: none;
+                                                                                                                                                                                                                                    position: absolute;
+                                                                                                                                                                                                                                        top: 70px;
+                                                                                                                                                                                                                                            left: 0;
+                                                                                                                                                                                                                                                width: 100%;
+                                                                                                                                                                                                                                                    padding: 20px;
+                                                                                                                                                                                                                                                        background-color: var(--white);
+                                                                                                                                                                                                                                                            border-top: 1px solid var(--border-color);
+                                                                                                                                                                                                                                                                box-shadow: var(--shadow);
+
+                                                                                                                                                                                                                                                                    flex-direction: column;
+                                                                                                                                                                                                                                                                        align-items: flex-start;
+                                                                                                                                                                                                                                                                            gap: 0;
+                                                                                                                                                                                                                                                                              }
+
+                                                                                                                                                                                                                                                                                .navbar-links.open {
+                                                                                                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                                                                                                      }
+
+                                                                                                                                                                                                                                                                                        .navbar-links a {
+                                                                                                                                                                                                                                                                                            width: 100%;
+                                                                                                                                                                                                                                                                                                padding: 12px 0;
+                                                                                                                                                                                                                                                                                                    border-bottom: 1px solid var(--border-color);
+                                                                                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                                                                                      }
