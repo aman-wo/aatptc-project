@@ -1,11 +1,16 @@
 function ProgramCard({ program }) {
-      return (
-          <article>
-                <h3 className="section-title">{program.name}</h3>
+        return (
+            <article className="content-card program-card">
+                  <div className="content-card-body">
 
-                      <p className="section-description">{program.description}</p>
-                          </article>
-                            );
-                            }
+                          <h3>{program.name}</h3>
 
-                            export default ProgramCard;
+                                  <p>{program.description}</p>
+
+                                        </div>
+                                            </article>
+                                              );
+                                              }
+
+                                              export default ProgramCard;
+

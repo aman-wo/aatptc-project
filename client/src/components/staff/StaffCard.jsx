@@ -1,26 +1,43 @@
 const StaffCard = ({ staff }) => {
-      const imageUrl = staff.image
-          ? `http://localhost:5000/uploads/staff/${staff.image}`
-              : null;
+        const imageUrl = staff.image
+            ? `http://localhost:5000/uploads/staff/${staff.image}`
+                : null;
 
-                return (
-                    <div>
-                          {imageUrl && (
-                                  <img
-                                            src={imageUrl}
-                                                      alt={staff.full_name}
-                                                              />
-                                                                    )}
+                  return (
+                      <article className="content-card staff-card">
 
-                                                                          <h3>{staff.full_name}</h3>
+                            {imageUrl ? (
+                                    <img
+                                              className="card-image staff-card-image"
+                                                        src={imageUrl}
+                                                                  alt={staff.full_name}
+                                                                          />
+                                                                                ) : (
+                                                                                        <div className="card-image staff-card-image card-image-placeholder">
+                                                                                                  No Photo
+                                                                                                          </div>
+                                                                                                                )}
 
-                                                                                <p>{staff.position}</p>
+                                                                                                                      <div className="content-card-body">
 
-                                                                                      {staff.email && <p>{staff.email}</p>}
+                                                                                                                              <h3>{staff.full_name}</h3>
 
-                                                                                            {staff.phone && <p>{staff.phone}</p>}
-                                                                                                </div>
-                                                                                                  );
-                                                                                                  };
+                                                                                                                                      <p className="staff-position">
+                                                                                                                                                {staff.position}
+                                                                                                                                                        </p>
 
-                                                                                                  export default StaffCard;
+                                                                                                                                                                {staff.email && (
+                                                                                                                                                                          <p>{staff.email}</p>
+                                                                                                                                                                                  )}
+
+                                                                                                                                                                                          {staff.phone && (
+                                                                                                                                                                                                    <p>{staff.phone}</p>
+                                                                                                                                                                                                            )}
+
+                                                                                                                                                                                                                  </div>
+
+                                                                                                                                                                                                                      </article>
+                                                                                                                                                                                                                        );
+                                                                                                                                                                                                                        };
+
+                                                                                                                                                                                                                        export default StaffCard;

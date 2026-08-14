@@ -1,27 +1,40 @@
 const DownloadCard = ({ item }) => {
-      const fileUrl = `http://localhost:5000/uploads/downloads/${item.file_name}`;
+        const fileUrl =
+            `http://localhost:5000/uploads/downloads/${item.file_name}`;
 
-        return (
-            <div>
-                  <h3>{item.title}</h3>
+              return (
+                  <article className="content-card download-card">
+                        <div className="content-card-body">
 
-                        {item.category && <p>{item.category}</p>}
+                                <span className="card-label">
+                                          {item.category || "Resource"}
+                                                  </span>
 
-                              {item.description && <p>{item.description}</p>}
+                                                          <h3>{item.title}</h3>
 
-                                    <p>
-                                            {item.file_type} · {item.file_size}
-                                                  </p>
+                                                                  {item.description && (
+                                                                            <p>{item.description}</p>
+                                                                                    )}
 
-                                                        <a
-                                                                href={fileUrl}
-                                                                        target="_blank"
-                                                                                rel="noopener noreferrer"
-                                                                                      >
-                                                                                              Download
-                                                                                                    </a>
-                                                                                                        </div>
-                                                                                                          );
-                                                                                                          };
+                                                                                            <div className="card-meta">
+                                                                                                      <span>
+                                                                                                                  {item.file_type} · {item.file_size}
+                                                                                                                            </span>
+                                                                                                                                    </div>
 
-                                                                                                          export default DownloadCard;
+                                                                                                                                            <a
+                                                                                                                                                      className="card-button"
+                                                                                                                                                                href={fileUrl}
+                                                                                                                                                                          target="_blank"
+                                                                                                                                                                                    rel="noopener noreferrer"
+                                                                                                                                                                                            >
+                                                                                                                                                                                                      Download
+                                                                                                                                                                                                              </a>
+
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                        </article>
+                                                                                                                                                                                                                          );
+                                                                                                                                                                                                                          };
+
+                                                                                                                                                                                                                          export default DownloadCard;
+

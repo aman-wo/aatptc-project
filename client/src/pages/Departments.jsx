@@ -3,60 +3,84 @@ import api from "../services/api";
 import DepartmentCard from "../components/departments/DepartmentCard";
 
 function Departments() {
-
   const [departments, setDepartments] = useState([]);
     const [loading, setLoading] = useState(true);
       const [error, setError] = useState("");
 
         useEffect(() => {
-
             api.get("/departments")
                   .then((response) => {
-//console.log("Departments API response:", response.data);
                           setDepartments(response.data.data);
                                   setLoading(false);
-
                                         })
                                               .catch((error) => {
-
                                                       console.error(error);
-
                                                               setError("Unable to load departments.");
                                                                       setLoading(false);
-
                                                                             });
-
                                                                               }, []);
 
                                                                                 if (loading) {
-                                                                                    return <p>Loading departments...</p>;
-                                                                                      }
+                                                                                    return (
+                                                                                          <section className="section departments-page">
+                                                                                                  <div className="container">
+                                                                                                            <div className="section-heading">
+                                                                                                                        <p className="section-subtitle">Academic Areas</p>
+                                                                                                                                    <h2>Our Departments</h2>
+                                                                                                                                                <p>Loading departments...</p>
+                                                                                                                                                          </div>
+                                                                                                                                                                  </div>
+                                                                                                                                                                        </section>
+                                                                                                                                                                            );
+                                                                                                                                                                              }
 
-                                                                                        if (error) {
-                                                                                            return <p>{error}</p>;
-                                                                                              }
+                                                                                                                                                                                if (error) {
+                                                                                                                                                                                    return (
+                                                                                                                                                                                          <section className="section departments-page">
+                                                                                                                                                                                                  <div className="container">
+                                                                                                                                                                                                            <div className="section-heading">
+                                                                                                                                                                                                                        <p className="section-subtitle">Academic Areas</p>
+                                                                                                                                                                                                                                    <h2>Our Departments</h2>
+                                                                                                                                                                                                                                                <p className="error-message">{error}</p>
+                                                                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                                                                        </section>
+                                                                                                                                                                                                                                                                            );
+                                                                                                                                                                                                                                                                              }
 
-                                                                                                return (
-                                                                                                    <section className="section">
-                                                                                                      <div className="container">
+                                                                                                                                                                                                                                                                                return (
+                                                                                                                                                                                                                                                                                    <section className="section departments-page">
+                                                                                                                                                                                                                                                                                          <div className="container">
 
-                                                                                                          <h2 className="section-title">Our Departments</h2>
+                                                                                                                                                                                                                                                                                                  <div className="section-heading">
+                                                                                                                                                                                                                                                                                                            <p className="section-subtitle">Academic Areas</p>
 
+                                                                                                                                                                                                                                                                                                                      <h2>Our Departments</h2>
 
-                                                                                                                {departments.length === 0 ? (
-                                                                                                                        <p>No departments available.</p>
-                                                                                                                              ) : (
-                                                                                                                                      departments?.map((item) => (
-                                                                                                                                                <DepartmentCard
-                                                                                                                                                            key={item.id}
-                                                                                                                                                                        department={item}
-                                                                                                                                                                                  />
-                                                                                                                                                                                          ))
-                                                                                                                                                                                                )}
-                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                <p>
+                                                                                                                                                                                                                                                                                                                                            Explore the departments and areas of study available
+                                                                                                                                                                                                                                                                                                                                                        at Addis Ababa Tegbareid Polytechnic College.
+                                                                                                                                                                                                                                                                                                                                                                  </p>
+                                                                                                                                                                                                                                                                                                                                                                          </div>
 
-                                                                                                                                                                                                    </section>
-                                                                                                                                                                                                      );
-                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                                                                                                                                                                  {departments.length === 0 ? (
+                                                                                                                                                                                                                                                                                                                                                                                            <p className="empty-message">
+                                                                                                                                                                                                                                                                                                                                                                                                        No departments available.
+                                                                                                                                                                                                                                                                                                                                                                                                                  </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                          ) : (
+                                                                                                                                                                                                                                                                                                                                                                                                                                    <div className="departments-grid">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                {departments.map((item) => (
+                                                                                                                                                                                                                                                                                                                                                                                                                                                              <DepartmentCard
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                              key={item.id}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              department={item}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ))}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          )}
 
-                                                                                                                                                                                                      export default Departments;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </section>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      );
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      export default Departments;

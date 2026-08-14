@@ -1,25 +1,39 @@
 function NewsCard({ news }) {
-        return (
-            <article>
+          return (
+              <article className="content-card news-card">
 
-                  {news.image && (
-                          <img
-                                    src={`http://localhost:5000/uploads/news/${news.image}`}
-                                              alt={news.title}
-                                                      />
-                                                            )}
+                    {news.image ? (
+                            <img
+                                      className="card-image"
+                                                src={`http://localhost:5000/uploads/news/${news.image}`}
+                                                          alt={news.title}
+                                                                  />
+                                                                        ) : (
+                                                                                <div className="card-image card-image-placeholder">
+                                                                                          No Image
+                                                                                                  </div>
+                                                                                                        )}
 
-                                                                  <h3>{news.title}</h3>
+                                                                                                              <div className="content-card-body">
 
-                                                                        <p>{news.content}</p>
+                                                                                                                      <h3>{news.title}</h3>
 
-                                                                              <small>
-                                                                                      {new Date(news.created_at).toLocaleDateString()}
-                                                                                            </small>
+                                                                                                                              <p>{news.content}</p>
 
-                                                                                                </article>
-                                                                                                  );
-                                                                                                  }
+                                                                                                                                      <div className="card-meta">
+                                                                                                                                                <span>
+                                                                                                                                                            {new Date(
+                                                                                                                                                                          news.created_at
+                                                                                                                                                                                      ).toLocaleDateString()}
+                                                                                                                                                                                                </span>
+                                                                                                                                                                                                        </div>
 
-                                                                                                  export default NewsCard;
+                                                                                                                                                                                                              </div>
+
+                                                                                                                                                                                                                  </article>
+                                                                                                                                                                                                                    );
+                                                                                                                                                                                                                    }
+
+                                                                                                                                                                                                                    export default NewsCard;
+
 
