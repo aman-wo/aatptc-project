@@ -27,27 +27,27 @@ function ProgramsPreview() {
 
                                                                                                                                 if (loading) {
                                                                                                                                     return (
-                                                                                                                                          <section>
-                                                                                                                                                  <h2>Our Programs</h2>
-                                                                                                                                                          <p>Loading programs...</p>
+                                                                                                                                          <section className="section">
+                                                                                                                                                  <h2 className="section-title">Our Programs</h2>
+                                                                                                                                                          <p className="section-description">Loading programs...</p>
                                                                                                                                                                 </section>
                                                                                                                                                                     );
                                                                                                                                                                       }
 
                                                                                                                                                                         if (error) {
                                                                                                                                                                             return (
-                                                                                                                                                                                  <section>
-                                                                                                                                                                                          <h2>Our Programs</h2>
-                                                                                                                                                                                                  <p>{error}</p>
+                                                                                                                                                                                  <section className="section">
+                                                                                                                                                                                          <h2 className="section-title">Our Programs</h2>
+                                                                                                                                                                                                  <p className="section-description">{error}</p>
                                                                                                                                                                                                         </section>
                                                                                                                                                                                                             );
                                                                                                                                                                                                               }
 
                                                                                                                                                                                                                 return (
-                                                                                                                                                                                                                    <section>
-                                                                                                                                                                                                                          <h2>Our Programs</h2>
+                                                                                                                                                                                                                    <section className="section">
+                                                                                                                                                                                                                          <h2 className="section-title">Our Programs</h2>
 
-                                                                                                                                                                                                                                <p>
+                                                                                                                                                                                                                                <p className="section-description">
                                                                                                                                                                                                                                         Discover programs designed to develop
                                                                                                                                                                                                                                                 practical and professional skills.
                                                                                                                                                                                                                                                       </p>

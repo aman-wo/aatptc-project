@@ -37,9 +37,10 @@ function Departments() {
                                                                                               }
 
                                                                                                 return (
-                                                                                                    <section>
+                                                                                                    <section className="section">
+                                                                                                      <div className="container">
 
-                                                                                                          <h2>Our Departments</h2>
+                                                                                                          <h2 className="section-title">Our Departments</h2>
 
 
                                                                                                                 {departments.length === 0 ? (
@@ -52,6 +53,7 @@ function Departments() {
                                                                                                                                                                                   />
                                                                                                                                                                                           ))
                                                                                                                                                                                                 )}
+                                                                                                                                                                                                </div>
 
                                                                                                                                                                                                     </section>
                                                                                                                                                                                                       );

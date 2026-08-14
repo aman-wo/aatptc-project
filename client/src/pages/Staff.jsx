@@ -37,8 +37,9 @@ const Staff = () => {
                                                                                                               }
 
                                                                                                                 return (
+                                                                                                                  <section className="section">
                                                                                                                     <div>
-                                                                                                                          <h1>Our Staff</h1>
+                                                                                                                          <h1 className="section-title">Our Staff</h1>
 
                                                                                                                                 <div>
                                                                                                                                         {staff.map((member) => (
@@ -49,6 +50,7 @@ const Staff = () => {
                                                                                                                                                                                             ))}
                                                                                                                                                                                                   </div>
                                                                                                                                                                                                       </div>
+                                                                                                                                                                                                      </section>
                                                                                                                                                                                                         );
                                                                                                                                                                                                         };
 

@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 function ContactCTA() {
   return (
-      <section>
-            <h2>Have Questions?</h2>
+      <section className="section">
+            <h2 className="section-title">Have Questions?</h2>
 
-                  <p>
+                  <p className="section-description">
                           Contact Addis Ababa Tegbareid Polytechnic College
                                   for more information.
                                         </p>

@@ -43,12 +43,13 @@ function Programs() {
                                                                                                                                                 }
 
                                                                                                                                                   return (
-                                                                                                                                                      <section>
+                                                                                                                                                      <section className="section">
 
-                                                                                                                                                            <h2>Our Programs</h2>
+                                                                                                                                                            <h2 className="section-title">
+                                                                                                                                                            Our Programs</h2>
 
                                                                                                                                                                   {programs.length === 0 ? (
-                                                                                                                                                                          <p>No programs available.</p>
+                                                                                                                                                                          <p className="section-description">No programs available.</p>
                                                                                                                                                                                 ) : (
                                                                                                                                                                                         programs.map((item) => (
                                                                                                                                                                                                   <ProgramCard
