@@ -16,7 +16,7 @@ function Navbar() {
                                         AATPTC
                                                 </Link>
 
-                                                        <button
+                                                        <button type="button"
                                                                   className="navbar-toggle"
                                                                             onClick={() => setIsOpen(!isOpen)}
                                                                                       aria-label="Toggle navigation menu"

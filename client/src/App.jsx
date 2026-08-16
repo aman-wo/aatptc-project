@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import './App.css'
-
-
 import { Routes, Route } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminLogin from "./pages/admin/AdminLogin";
+
 import Departments from "./pages/Departments";
 import Programs from "./pages/Programs";
 import Events from "./pages/Events";
@@ -12,54 +11,44 @@ import Staff from "./pages/Staff";
 import Gallery from "./pages/Gallery";
 import Downloads from "./pages/Downloads";
 import Announcements from "./pages/Announcements";
-
 import Home from "./pages/Home";
 import About from "./pages/About";
 import News from "./pages/News";
 import Contact from "./pages/Contact";
 
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
 function App() {
-
   return (
-        <>
-      <MainLayout>
-      
-            <Routes>
-            
-                    <Route path="/" element={<Home />} />
-                    
-                            <Route path="/about" element={<About />} />
+      <Routes>
 
-                            <Route
-                              path="/departments"
-                                element={<Departments />}
-                                />
+            {/* Public website */}
+                  <Route path="/" element={<MainLayout />}>
 
-                                <Route path="/programs" element={<Programs />} />
+                          <Route index element={<Home />} />
+                                  <Route path="about" element={<About />} />
+                                          <Route path="departments" element={<Departments />} />
+                                                  <Route path="programs" element={<Programs />} />
+                                                          <Route path="events" element={<Events />} />
+                                                                  <Route path="staff" element={<Staff />} />
+                                                                          <Route path="gallery" element={<Gallery />} />
+                                                                                  <Route path="downloads" element={<Downloads />} />
+                                                                                          <Route path="announcements" element={<Announcements />} />
+                                                                                                  <Route path="news" element={<News />} />
+                                                                                                          <Route path="contact" element={<Contact />} />
 
-                                <Route path="/events" element={<Events />} />
-                            <Route path="/staff" element={<Staff />} />
-                            <Route path="/gallery" element={<Gallery />} />
-                            <Route path="/downloads" element={<Downloads />} />
-                            <Route
-                              path="/announcements"
-                                element={<Announcements />}
-                                />
-                                    
-                                    
-                                            <Route path="/news" element={<News />} />
-                                            
-                                                    <Route path="/contact" element={<Contact />} />
-                                                    
-                                                    
-                                                          </Routes>
-                                                          
-                                                              </MainLayout>
-                                                              </>
-                                                                );
-                                                                
-                                                        }
-                                                                
-                                                                export default App;                                       
+                                                                                                                </Route>
+
+                                                                                                                      {/* Admin website */}
+                                                                                                                            <Route path="/admin" element={<AdminLayout />}>
+                                                                                                                              <Route path="login" element={<AdminLogin />} />
+                                                                                                                                <Route path="dashboard" element={<AdminDashboard />} />
+                                                                                                                                </Route>
+
+                                                                                                                                              </Routes>
+                                                                                                                                                );
+                                                                                                                                                }
+
+                                                                                                                                                export default App;
 
                                                                 
