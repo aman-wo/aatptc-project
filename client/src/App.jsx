@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminLogin from "./pages/admin/AdminLogin";
 
+
 import Departments from "./pages/Departments";
 import Programs from "./pages/Programs";
 import Events from "./pages/Events";
@@ -17,6 +18,7 @@ import News from "./pages/News";
 import Contact from "./pages/Contact";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 
 function App() {
   return (
@@ -40,10 +42,13 @@ function App() {
                                                                                                                 </Route>
 
                                                                                                                       {/* Admin website */}
-                                                                                                                            <Route path="/admin" element={<AdminLayout />}>
-                                                                                                                              <Route path="login" element={<AdminLogin />} />
-                                                                                                                                <Route path="dashboard" element={<AdminDashboard />} />
-                                                                                                                                </Route>
+                                                                                                                            <Route path="/admin/login" element={<AdminLogin />} />
+
+                                                                                                                            <Route element={<ProtectedAdminRoute />}>
+                                                                                                                              <Route path="/admin" element={<AdminLayout />}>
+                                                                                                                                  <Route path="dashboard" element={<AdminDashboard />} />
+                                                                                                                                    </Route>
+                                                                                                                                    </Route>
 
                                                                                                                                               </Routes>
                                                                                                                                                 );
