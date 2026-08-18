@@ -19,6 +19,11 @@ import Contact from "./pages/Contact";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+import DepartmentsManagement from "./pages/admin/DepartmentsManagement";
+import ProgramsManagement from "./pages/admin/ProgramsManagement";
+import NewsManagement from "./pages/admin/NewsManagement";
+import EventsManagement from "./pages/admin/EventsManagement";
+import StaffManagement from "./pages/admin/StaffManagement";
 
 function App() {
   return (
@@ -47,6 +52,11 @@ function App() {
                                                                                                                             <Route element={<ProtectedAdminRoute />}>
                                                                                                                               <Route path="/admin" element={<AdminLayout />}>
                                                                                                                                   <Route path="dashboard" element={<AdminDashboard />} />
+                                                                                                                                  <Route path="departments" element={<DepartmentsManagement />} />
+                                                                                                                                  <Route path="programs" element={<ProgramsManagement />} />
+                                                                                                                                  <Route path="news" element={<NewsManagement />} />
+                                                                                                                                  <Route path="events" element={<EventsManagement />} />
+                                                                                                                                  <Route path="staff" element={<StaffManagement />} />
                                                                                                                                     </Route>
                                                                                                                                     </Route>
 
