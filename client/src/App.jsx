@@ -24,6 +24,10 @@ import ProgramsManagement from "./pages/admin/ProgramsManagement";
 import NewsManagement from "./pages/admin/NewsManagement";
 import EventsManagement from "./pages/admin/EventsManagement";
 import StaffManagement from "./pages/admin/StaffManagement";
+import GalleryManagement from "./pages/admin/GalleryManagement";
+import DownloadsManagement from "./pages/admin/DownloadsManagement";
+import AnnouncementsManagement from "./pages/admin/AnnouncementsManagement";
+import ContactsManagement from "./pages/admin/ContactsManagement";
 
 function App() {
   return (
@@ -57,6 +61,16 @@ function App() {
                                                                                                                                   <Route path="news" element={<NewsManagement />} />
                                                                                                                                   <Route path="events" element={<EventsManagement />} />
                                                                                                                                   <Route path="staff" element={<StaffManagement />} />
+                                                                                                                                  <Route path="gallery" element={<GalleryManagement />} />
+                                                                                                                                  <Route path="downloads" element={<DownloadsManagement />} />
+                                                                                                                                  <Route
+                                                                                                                                    path="announcements"
+                                                                                                                                      element={<AnnouncementsManagement />}
+                                                                                                                                      />
+                                                                                                                                      <Route
+                                                                                                                                        path="contacts"
+                                                                                                                                          element={<ContactsManagement />}
+                                                                                                                                          />
                                                                                                                                     </Route>
                                                                                                                                     </Route>
 

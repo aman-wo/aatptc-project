@@ -1,14 +1,21 @@
 const validateDownload = (req, res, next) => {
-      const { title, file_name } = req.body;
+    const { title } = req.body;
 
-        if (!title || !file_name) {
-            return res.status(400).json({
-                  success: false,
-                        message: "Title and file name are required.",
-                            });
-                              }
+      const fileName = req.file
+          ? req.file.filename
+              : req.body.file_name;
 
-                                next();
-                                };
+                if (!title || !fileName) {
+                    return res.status(400).json({
+                          success: false,
+                                message: "Title and file are required."
+                                    });
+                                      }
 
-                                module.exports = validateDownload;
+                                        req.body.file_name = fileName;
+
+                                          next();
+                                          };
+
+                                          module.exports = validateDownload;
+

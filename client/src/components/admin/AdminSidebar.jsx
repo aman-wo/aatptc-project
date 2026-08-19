@@ -1,22 +1,71 @@
 import { NavLink } from "react-router-dom";
 
 function AdminSidebar() {
-  return (
-      <aside className="admin-sidebar">
-            <nav className="admin-nav">
-                    <NavLink to="/admin/dashboard">Dashboard</NavLink>
-                            <NavLink to="/admin/departments">Departments</NavLink>
-                                    <NavLink to="/admin/programs">Programs</NavLink>
-                                            <NavLink to="/admin/news">News</NavLink>
-                                                    <NavLink to="/admin/events">Events</NavLink>
-                                                            <NavLink to="/admin/staff">Staff</NavLink>
-                                                                    <NavLink to="/admin/gallery">Gallery</NavLink>
-                                                                            <NavLink to="/admin/downloads">Downloads</NavLink>
-                                                                                    <NavLink to="/admin/announcements">Announcements</NavLink>
-                                                                                            <NavLink to="/admin/contacts">Contacts</NavLink>
-                                                                                                  </nav>
-                                                                                                      </aside>
-                                                                                                        );
-                                                                                                        }
+  const menuItems = [
+      {
+            name: "Dashboard",
+                  path: "/admin/dashboard",
+                      },
+                          {
+                                name: "Departments",
+                                      path: "/admin/departments",
+                                          },
+                                              {
+                                                    name: "Programs",
+                                                          path: "/admin/programs",
+                                                              },
+                                                                  {
+                                                                        name: "News",
+                                                                              path: "/admin/news",
+                                                                                  },
+                                                                                      {
+                                                                                            name: "Events",
+                                                                                                  path: "/admin/events",
+                                                                                                      },
+                                                                                                          {
+                                                                                                                name: "Staff",
+                                                                                                                      path: "/admin/staff",
+                                                                                                                          },
+                                                                                                                              {
+                                                                                                                                    name: "Gallery",
+                                                                                                                                          path: "/admin/gallery",
+                                                                                                                                              },
+                                                                                                                                                  {
+                                                                                                                                                        name: "Downloads",
+                                                                                                                                                              path: "/admin/downloads",
+                                                                                                                                                                  },
+                                                                                                                                                                      {
+                                                                                                                                                                            name: "Announcements",
+                                                                                                                                                                                  path: "/admin/announcements",
+                                                                                                                                                                                      },
+                                                                                                                                                                                          {
+                                                                                                                                                                                                name: "Contacts",
+                                                                                                                                                                                                      path: "/admin/contacts",
+                                                                                                                                                                                                          },
+                                                                                                                                                                                                            ];
 
-                                                                                                        export default AdminSidebar;
+                                                                                                                                                                                                              return (
+                                                                                                                                                                                                                  <aside className="admin-sidebar">
+                                                                                                                                                                                                                        <div className="admin-sidebar-title">
+                                                                                                                                                                                                                                <h2>AATPTC</h2>
+                                                                                                                                                                                                                                        <p>Admin Panel</p>
+                                                                                                                                                                                                                                              </div>
+
+                                                                                                                                                                                                                                                    <nav className="admin-nav">
+                                                                                                                                                                                                                                                            {menuItems.map((item) => (
+                                                                                                                                                                                                                                                                      <NavLink
+                                                                                                                                                                                                                                                                                  key={item.path}
+                                                                                                                                                                                                                                                                                              to={item.path}
+                                                                                                                                                                                                                                                                                                          className={({ isActive }) =>
+                                                                                                                                                                                                                                                                                                                        isActive ? "admin-nav-link active" : "admin-nav-link"
+                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                              >
+                                                                                                                                                                                                                                                                                                                                                          {item.name}
+                                                                                                                                                                                                                                                                                                                                                                    </NavLink>
+                                                                                                                                                                                                                                                                                                                                                                            ))}
+                                                                                                                                                                                                                                                                                                                                                                                  </nav>
+                                                                                                                                                                                                                                                                                                                                                                                      </aside>
+                                                                                                                                                                                                                                                                                                                                                                                        );
+                                                                                                                                                                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                                                                                                                                                                        export default AdminSidebar;

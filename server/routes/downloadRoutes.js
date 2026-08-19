@@ -31,7 +31,7 @@ validateDownload,
 createDownload
 );
 router.put("/:id", verifyToken, isAdmin, validateDownload, updateDownload);
-router.delete("/:id", verifyToken, isAdmin, validateDownload, deleteDownload);
+router.delete("/:id", verifyToken, isAdmin, deleteDownload);
 
 
 module.exports=router;
