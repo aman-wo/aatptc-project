@@ -1,39 +1,65 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Hero() {
-  return (
-      <section className="hero">
-            <div className="container hero-container">
+  const slides = [
+      "Developing skilled professionals through quality technical and vocational education and training.",
+          "Empowering students with practical skills, technical knowledge, and the confidence to build a successful future.",
+              "Building a skilled workforce through practical learning, innovation, and quality technical education.",
+                ];
 
-                    <div className="hero-content">
-                              <p className="hero-subtitle">
-                                          Welcome to AATPTC
-                                                    </p>
+                  const [currentSlide, setCurrentSlide] = useState(0);
 
-                                                              <h1>
-                                                                          Addis Ababa Tegbareid Polytechnic College
-                                                                                    </h1>
+                    useEffect(() => {
+                        const timer = setInterval(() => {
+                              setCurrentSlide((prev) => (prev + 1) % slides.length);
+                                  }, 5000);
 
-                                                                                              <p className="hero-description">
-                                                                                                          Developing skilled professionals through
-                                                                                                                      quality technical and vocational education
-                                                                                                                                  and training.
-                                                                                                                                            </p>
+                                      return () => clearInterval(timer);
+                                        }, [slides.length]);
 
-                                                                                                                                                      <div className="hero-actions">
-                                                                                                                                                                  <Link to="/programs" className="btn-primary">
-                                                                                                                                                                                Explore Programs
-                                                                                                                                                                                            </Link>
+                                          return (
+                                              <section className="hero">
+                                                    <div className="container hero-container">
+                                                            <div className="hero-content">
+                                                                      <p className="hero-subtitle">
+                                                                                  Welcome to AATPTC
+                                                                                            </p>
 
-                                                                                                                                                                                                        <Link to="/contact" className="btn-secondary">
-                                                                                                                                                                                                                      Contact Us
-                                                                                                                                                                                                                                  </Link>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                    </div>
+                                                                                                      <h1>
+                                                                                                                  Addis Ababa Tegbareid Polytechnic College
+                                                                                                                            </h1>
 
-                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                              </section>
-                                                                                                                                                                                                                                                                );
-                                                                                                                                                                                                                                                                }
+                                                                                                                                      <p className="hero-description">
+                                                                                                                                                  {slides[currentSlide]}
+                                                                                                                                                            </p>
 
-                                                                                                                                                                                                                                                                export default Hero;
+                                                                                                                                                                      <div className="hero-actions">
+                                                                                                                                                                                  <Link to="/programs" className="btn-primary">
+                                                                                                                                                                                                Explore Programs
+                                                                                                                                                                                                            </Link>
+
+                                                                                                                                                                                                                        <Link to="/contact" className="btn-secondary">
+                                                                                                                                                                                                                                      Contact Us
+                                                                                                                                                                                                                                                  </Link>
+                                                                                                                                                                                                                                                            </div>
+
+                                                                                                                                                                                                                                                                      <div className="hero-dots">
+                                                                                                                                                                                                                                                                                  {slides.map((_, index) => (
+                                                                                                                                                                                                                                                                                                <button
+                                                                                                                                                                                                                                                                                                                key={index}
+                                                                                                                                                                                                                                                                                                                                className={`hero-dot ${
+                                                                                                                                                                                                                                                                                                                                                  currentSlide === index ? "active" : ""
+                                                                                                                                                                                                                                                                                                                                                                  }`}
+                                                                                                                                                                                                                                                                                                                                                                                  onClick={() => setCurrentSlide(index)}
+                                                                                                                                                                                                                                                                                                                                                                                                  aria-label={`Go to slide ${index + 1}`}
+                                                                                                                                                                                                                                                                                                                                                                                                                />
+                                                                                                                                                                                                                                                                                                                                                                                                                            ))}
+                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                              </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        </section>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          );
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          export default Hero;

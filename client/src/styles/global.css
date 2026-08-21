@@ -42,7 +42,7 @@ body {
  font-family: Arial, Helvetica, sansserif;
  line-height: 1.6;
  color: var(--text-color);
- background-color: var(--backgroundcolor);
+ background-color: var(--background-color);
  -webkit-font-smoothing: antialiased;
  text-rendering: optimizeLegibility;}
 /* ---------- Reduced Motion ---------- */
@@ -1136,3 +1136,4 @@ align-self: flex-start;
                                                                                                                                                                                                                                                                                                                                             padding: 18px;
                                                                                                                                                                                                                                                                                                                                               }
                                                                                                                                                                                                                                                                                                                                               }
+
