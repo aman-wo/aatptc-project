@@ -1136,4 +1136,180 @@ align-self: flex-start;
                                                                                                                                                                                                                                                                                                                                             padding: 18px;
                                                                                                                                                                                                                                                                                                                                               }
                                                                                                                                                                                                                                                                                                                                               }
+/* ================================
+   ADMIN LOGIN
+   ================================ */
 
+   .admin-login-page {
+     min-height: 100vh;
+       display: flex;
+         align-items: center;
+           justify-content: center;
+             padding: 30px 20px;
+               background: #f4f7fb;
+               }
+
+               .admin-login-card {
+                 width: 100%;
+                   max-width: 430px;
+                     background: #ffffff;
+                       padding: 40px;
+                         border-radius: 14px;
+                           box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+                             border: 1px solid #e8edf3;
+                             }
+
+                             .admin-login-header {
+                               text-align: center;
+                                 margin-bottom: 30px;
+                                 }
+
+                                 .admin-login-logo {
+                                   width: 70px;
+                                     height: 70px;
+                                       margin: 0 auto 18px;
+                                         display: flex;
+                                           align-items: center;
+                                             justify-content: center;
+                                               border-radius: 50%;
+                                                 background: #0b5ed7;
+                                                   color: #ffffff;
+                                                     font-size: 18px;
+                                                       font-weight: 700;
+                                                         letter-spacing: 1px;
+                                                         }
+
+                                                         .admin-login-header h1 {
+                                                           margin: 0 0 8px;
+                                                             font-size: 28px;
+                                                               color: #1f2937;
+                                                               }
+
+                                                               .admin-login-header p {
+                                                                 margin: 0;
+                                                                   color: #6b7280;
+                                                                     font-size: 14px;
+                                                                     }
+
+                                                                     .admin-login-form {
+                                                                       display: flex;
+                                                                         flex-direction: column;
+                                                                           gap: 20px;
+                                                                           }
+
+                                                                           .admin-form-group {
+                                                                             display: flex;
+                                                                               flex-direction: column;
+                                                                                 gap: 8px;
+                                                                                 }
+
+                                                                                 .admin-form-group label {
+                                                                                   font-size: 14px;
+                                                                                     font-weight: 600;
+                                                                                       color: #374151;
+                                                                                       }
+
+                                                                                       .admin-form-group input {
+                                                                                         width: 100%;
+                                                                                           box-sizing: border-box;
+                                                                                             padding: 13px 14px;
+                                                                                               border: 1px solid #d1d5db;
+                                                                                                 border-radius: 8px;
+                                                                                                   font-size: 15px;
+                                                                                                     outline: none;
+                                                                                                       transition: border-color 0.2s, box-shadow 0.2s;
+                                                                                                         background: #ffffff;
+                                                                                                         }
+
+                                                                                                         .admin-form-group input:focus {
+                                                                                                           border-color: #0b5ed7;
+                                                                                                             box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.12);
+                                                                                                             }
+
+                                                                                                             .admin-form-group input::placeholder {
+                                                                                                               color: #9ca3af;
+                                                                                                               }
+
+                                                                                                               .admin-login-button {
+                                                                                                                 width: 100%;
+                                                                                                                   padding: 14px;
+                                                                                                                     margin-top: 5px;
+                                                                                                                       border: none;
+                                                                                                                         border-radius: 8px;
+                                                                                                                           background: #0b5ed7;
+                                                                                                                             color: #ffffff;
+                                                                                                                               font-size: 16px;
+                                                                                                                                 font-weight: 600;
+                                                                                                                                   cursor: pointer;
+                                                                                                                                     transition: background 0.2s, transform 0.2s;
+                                                                                                                                     }
+
+                                                                                                                                     .admin-login-button:hover {
+                                                                                                                                       background: #084298;
+                                                                                                                                       }
+
+                                                                                                                                       .admin-login-button:active {
+                                                                                                                                         transform: scale(0.98);
+                                                                                                                                         }
+
+                                                                                                                                         .admin-login-button:disabled {
+                                                                                                                                           background: #8aaee8;
+                                                                                                                                             cursor: not-allowed;
+                                                                                                                                               transform: none;
+                                                                                                                                               }
+
+                                                                                                                                               .admin-login-error {
+                                                                                                                                                 margin-bottom: 20px;
+                                                                                                                                                   padding: 12px 14px;
+                                                                                                                                                     border-radius: 8px;
+                                                                                                                                                       background: #fef2f2;
+                                                                                                                                                         border: 1px solid #fecaca;
+                                                                                                                                                           color: #b91c1c;
+                                                                                                                                                             font-size: 14px;
+                                                                                                                                                               text-align: center;
+                                                                                                                                                               }
+
+                                                                                                                                                               .admin-login-footer {
+                                                                                                                                                                 margin-top: 30px;
+                                                                                                                                                                   padding-top: 20px;
+                                                                                                                                                                     border-top: 1px solid #e5e7eb;
+                                                                                                                                                                       text-align: center;
+                                                                                                                                                                       }
+
+                                                                                                                                                                       .admin-login-footer p {
+                                                                                                                                                                         margin: 0 0 4px;
+                                                                                                                                                                           font-size: 13px;
+                                                                                                                                                                             font-weight: 600;
+                                                                                                                                                                               color: #4b5563;
+                                                                                                                                                                               }
+
+                                                                                                                                                                               .admin-login-footer span {
+                                                                                                                                                                                 font-size: 12px;
+                                                                                                                                                                                   color: #9ca3af;
+                                                                                                                                                                                   }
+
+
+                                                                                                                                                                                   /* ================================
+                                                                                                                                                                                      ADMIN LOGIN - MOBILE
+                                                                                                                                                                                      ================================ */
+
+                                                                                                                                                                                      @media (max-width: 480px) {
+                                                                                                                                                                                        .admin-login-page {
+                                                                                                                                                                                            padding: 20px 15px;
+                                                                                                                                                                                              }
+
+                                                                                                                                                                                                .admin-login-card {
+                                                                                                                                                                                                    padding: 30px 22px;
+                                                                                                                                                                                                        border-radius: 12px;
+                                                                                                                                                                                                          }
+
+                                                                                                                                                                                                            .admin-login-header h1 {
+                                                                                                                                                                                                                font-size: 24px;
+                                                                                                                                                                                                                  }
+
+                                                                                                                                                                                                                    .admin-login-logo {
+                                                                                                                                                                                                                        width: 60px;
+                                                                                                                                                                                                                            height: 60px;
+                                                                                                                                                                                                                                font-size: 16px;
+                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                  }
