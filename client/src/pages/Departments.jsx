@@ -3,10 +3,20 @@ import api from "../services/api";
 import DepartmentCard from "../components/departments/DepartmentCard";
 
 function Departments() {
+        const departmentImages = {
+                  Automotive:
+                      "https://raw.githubusercontent.com/aman-wo/Image/main/Automotive.jpg",
+
+                        "Information Technology":
+                            "https://raw.githubusercontent.com/aman-wo/Image/main/ICT.jpg",
+
+                              Manufacturing:
+                                  "https://raw.githubusercontent.com/aman-wo/Image/main/Manufacturing.jpg",
+                                  };
+        
   const [departments, setDepartments] = useState([]);
     const [loading, setLoading] = useState(true);
       const [error, setError] = useState("");
-
         useEffect(() => {
             api.get("/departments")
                   .then((response) => {
@@ -27,6 +37,7 @@ function Departments() {
                                                                                                             <div className="section-heading">
                                                                                                                         <p className="section-subtitle">Academic Areas</p>
                                                                                                                                     <h2>Our Departments</h2>
+                                                                                                                                    
                                                                                                                                                 <p>Loading departments...</p>
                                                                                                                                                           </div>
                                                                                                                                                                   </div>
@@ -47,6 +58,7 @@ function Departments() {
                                                                                                                                                                                                                                                                         </section>
                                                                                                                                                                                                                                                                             );
                                                                                                                                                                                                                                                                               }
+
 
                                                                                                                                                                                                                                                                                 return (
                                                                                                                                                                                                                                                                                     <section className="section departments-page">
@@ -73,6 +85,7 @@ function Departments() {
                                                                                                                                                                                                                                                                                                                                                                                                                                                               <DepartmentCard
                                                                                                                                                                                                                                                                                                                                                                                                                                                                               key={item.id}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               department={item}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              image={departmentImages[item.name]}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             />
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ))}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </div>

@@ -4,6 +4,17 @@ import DepartmentCard from "../departments/DepartmentCard";
 import { Link } from "react-router-dom";
 
 function DepartmentsPreview() {
+        const departmentImages = {
+                  Automotive:
+                      "https://raw.githubusercontent.com/aman-wo/Image/main/Automotive.jpg",
+
+                        "Information Technology":
+                            "https://raw.githubusercontent.com/aman-wo/Image/main/ICT.jpg",
+
+                              Manufacturing:
+                                  "https://raw.githubusercontent.com/aman-wo/Image/main/Manufacturing.jpg",
+                                  };
+        
   const [departments, setDepartments] = useState([]);
     const [loading, setLoading] = useState(true);
       const [error, setError] = useState("");
@@ -75,6 +86,7 @@ function DepartmentsPreview() {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <DepartmentCard
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     key={item.id}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     department={item}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    image={departmentImages[item.name]}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   />
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ))}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </div>

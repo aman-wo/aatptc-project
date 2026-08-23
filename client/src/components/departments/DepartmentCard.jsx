@@ -1,14 +1,24 @@
-function DepartmentCard({ department }) {
+function DepartmentCard({ department, image }) {
         return (
-            <article className="content-card department-card">
-                  <div className="content-card-body">
-                          <h3>{department.name}</h3>
+            <div className="department-card">
 
-                                  <p>{department.description}</p>
-                                        </div>
-                                            </article>
-                                              );
-                                              }
+                  {image && (
+                          <img
+                                    src={image}
+                                              alt={department.name}
+                                                        className="department-card-image"
+                                                                />
+                                                                      )}
 
-                                              export default DepartmentCard;
+                                                                            <div className="department-card-content">
+                                                                                    <h3>{department.name}</h3>
+                                                                                            <p>{department.description}</p>
+                                                                                                  </div>
+
+                                                                                                      </div>
+                                                                                                        );
+                                                                                                        }
+
+                                                                                                        export default DepartmentCard;
+
 
