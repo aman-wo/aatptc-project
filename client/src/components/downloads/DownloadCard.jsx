@@ -1,6 +1,6 @@
 const DownloadCard = ({ item }) => {
         const fileUrl =
-            `http://localhost:5000/uploads/downloads/${item.file_name}`;
+            `${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/downloads/${item.file_name}`;
 
               return (
                   <article className="content-card download-card">

@@ -5,7 +5,7 @@ function NewsCard({ news }) {
                     {news.image ? (
                             <img
                                       className="card-image"
-                                                src={`http://localhost:5000/uploads/news/${news.image}`}
+                                                src={`${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/news/${news.image}`}
                                                           alt={news.title}
                                                                   />
                                                                         ) : (

@@ -1,6 +1,6 @@
 const StaffCard = ({ staff }) => {
         const imageUrl = staff.image
-            ? `http://localhost:5000/uploads/staff/${staff.image}`
+            ? `${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/staff/${staff.image}`
                 : null;
 
                   return (

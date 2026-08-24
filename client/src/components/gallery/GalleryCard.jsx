@@ -1,6 +1,6 @@
 const GalleryCard = ({ item }) => {
         const imageUrl = item.image
-            ? `http://localhost:5000/uploads/gallery/${item.image}`
+            ? `${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/gallery/${item.image}`
                 : null;
 
                   return (
