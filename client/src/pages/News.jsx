@@ -4,83 +4,77 @@ import NewsCard from "../components/news/NewsCard";
 
 function News() {
   const [news, setNews] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            api.get("/news")
-                  .then((response) => {
-                          setNews(response.data);
-                                  setLoading(false);
-                                        })
-                                              .catch((error) => {
-                                                      console.error(error);
-                                                              setError("Unable to load news.");
-                                                                      setLoading(false);
-                                                                            });
-                                                                              }, []);
+  useEffect(() => {
+    api
+      .get("/news")
+      .then((response) => {
+        setNews(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("Unable to load news.");
+        setLoading(false);
+      });
+  }, []);
 
-                                                                                if (loading) {
-                                                                                    return (
-                                                                                          <section className="section news-page">
-                                                                                                  <div className="container">
-                                                                                                            <div className="section-heading">
-                                                                                                                        <p className="section-subtitle">Stay Updated</p>
-                                                                                                                                    <h2>Latest News</h2>
-                                                                                                                                                <p>Loading news...</p>
-                                                                                                                                                          </div>
-                                                                                                                                                                  </div>
-                                                                                                                                                                        </section>
-                                                                                                                                                                            );
-                                                                                                                                                                              }
+  if (loading) {
+    return (
+      <section className="section news-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Stay Updated</p>
+            <h2>Latest News</h2>
+            <p>Loading news...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                if (error) {
-                                                                                                                                                                                    return (
-                                                                                                                                                                                          <section className="section news-page">
-                                                                                                                                                                                                  <div className="container">
-                                                                                                                                                                                                            <div className="section-heading">
-                                                                                                                                                                                                                        <p className="section-subtitle">Stay Updated</p>
-                                                                                                                                                                                                                                    <h2>Latest News</h2>
-                                                                                                                                                                                                                                                <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                        </section>
-                                                                                                                                                                                                                                                                            );
-                                                                                                                                                                                                                                                                              }
+  if (error) {
+    return (
+      <section className="section news-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Stay Updated</p>
+            <h2>Latest News</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                return (
-                                                                                                                                                                                                                                                                                    <section className="section news-page">
-                                                                                                                                                                                                                                                                                          <div className="container">
+  return (
+    <section className="section news-page">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Stay Updated</p>
 
-                                                                                                                                                                                                                                                                                                  <div className="section-heading">
-                                                                                                                                                                                                                                                                                                            <p className="section-subtitle">Stay Updated</p>
+          <h2>Latest News</h2>
 
-                                                                                                                                                                                                                                                                                                                      <h2>Latest News</h2>
+          <p>
+            Get the latest news and updates from Addis Ababa Tegbareid
+            Polytechnic College.
+          </p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                <p>
-                                                                                                                                                                                                                                                                                                                                            Get the latest news and updates from
-                                                                                                                                                                                                                                                                                                                                                        Addis Ababa Tegbareid Polytechnic College.
-                                                                                                                                                                                                                                                                                                                                                                  </p>
-                                                                                                                                                                                                                                                                                                                                                                          </div>
+        {news.length === 0 ? (
+          <p className="empty-message">No news available.</p>
+        ) : (
+          <div className="news-grid">
+            {news.map((item) => (
+              <NewsCard key={item.id} news={item} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                  {news.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                            <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                        No news available.
-                                                                                                                                                                                                                                                                                                                                                                                                                  </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                          ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <div className="news-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                {news.map((item) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              <NewsCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              key={item.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              news={item}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      export default News;
+export default News;

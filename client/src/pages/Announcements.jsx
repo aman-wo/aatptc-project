@@ -4,87 +4,83 @@ import AnnouncementCard from "../components/announcements/AnnouncementCard";
 
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            const fetchAnnouncements = async () => {
-                  try {
-                          const response = await api.get("/announcements");
+  useEffect(() => {
+    const fetchAnnouncements = async () => {
+      try {
+        const response = await api.get("/announcements");
 
-                                  setAnnouncements(response.data.data);
-                                        } catch (err) {
-                                                console.error(err);
-                                                        setError("Failed to load announcements.");
-                                                              } finally {
-                                                                      setLoading(false);
-                                                                            }
-                                                                                };
+        setAnnouncements(response.data.data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load announcements.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                                                                                    fetchAnnouncements();
-                                                                                      }, []);
+    fetchAnnouncements();
+  }, []);
 
-                                                                                        if (loading) {
-                                                                                            return (
-                                                                                                  <section className="section announcements-page">
-                                                                                                          <div className="container">
-                                                                                                                    <div className="section-heading">
-                                                                                                                                <p className="section-subtitle">Stay Informed</p>
-                                                                                                                                            <h2>Announcements</h2>
-                                                                                                                                                        <p>Loading announcements...</p>
-                                                                                                                                                                  </div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                                </section>
-                                                                                                                                                                                    );
-                                                                                                                                                                                      }
+  if (loading) {
+    return (
+      <section className="section announcements-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Stay Informed</p>
+            <h2>Announcements</h2>
+            <p>Loading announcements...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                        if (error) {
-                                                                                                                                                                                            return (
-                                                                                                                                                                                                  <section className="section announcements-page">
-                                                                                                                                                                                                          <div className="container">
-                                                                                                                                                                                                                    <div className="section-heading">
-                                                                                                                                                                                                                                <p className="section-subtitle">Stay Informed</p>
-                                                                                                                                                                                                                                            <h2>Announcements</h2>
-                                                                                                                                                                                                                                                        <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                                      }
+  if (error) {
+    return (
+      <section className="section announcements-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Stay Informed</p>
+            <h2>Announcements</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                        return (
-                                                                                                                                                                                                                                                                                            <section className="section announcements-page">
-                                                                                                                                                                                                                                                                                                  <div className="container">
+  return (
+    <section className="section announcements-page">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Stay Informed</p>
 
-                                                                                                                                                                                                                                                                                                          <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                    <p className="section-subtitle">Stay Informed</p>
+          <h2>Announcements</h2>
 
-                                                                                                                                                                                                                                                                                                                              <h2>Announcements</h2>
+          <p>
+            Stay updated with important announcements and information from
+            AATPTC.
+          </p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                                                                                    Stay updated with important announcements and
-                                                                                                                                                                                                                                                                                                                                                                information from AATPTC.
-                                                                                                                                                                                                                                                                                                                                                                          </p>
-                                                                                                                                                                                                                                                                                                                                                                                  </div>
+        {announcements.length === 0 ? (
+          <p className="empty-message">No announcements available.</p>
+        ) : (
+          <div className="announcements-grid">
+            {announcements.map((announcement) => (
+              <AnnouncementCard
+                key={announcement.id}
+                announcement={announcement}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
 
-                                                                                                                                                                                                                                                                                                                                                                                          {announcements.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                                    <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                                No announcements available.
-                                                                                                                                                                                                                                                                                                                                                                                                                          </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                  ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <div className="announcements-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        {announcements.map((announcement) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <AnnouncementCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      key={announcement.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      announcement={announcement}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              };
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              export default Announcements;
+export default Announcements;

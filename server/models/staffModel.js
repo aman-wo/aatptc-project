@@ -11,41 +11,37 @@ const getAllStaff = (callback) => {
                                     ORDER BY staff.full_name ASC
                                       `;
 
-                                        db.query(sql, callback);
-                                        };
+  db.query(sql, callback);
+};
 
-                                        const getStaffById = (id, callback) => {
-                                          db.query(
-                                              "SELECT * FROM staff WHERE id = ?",
-                                                  [id],
-                                                      callback
-                                                        );
-                                                        };
+const getStaffById = (id, callback) => {
+  db.query("SELECT * FROM staff WHERE id = ?", [id], callback);
+};
 
-                                                        const createStaff = (staff, callback) => {
-                                                          const sql = `
+const createStaff = (staff, callback) => {
+  const sql = `
                                                               INSERT INTO staff
                                                                   (department_id, full_name, position, email, phone, biography, image)
                                                                       VALUES (?, ?, ?, ?, ?, ?, ?)
                                                                         `;
 
-                                                                          db.query(
-                                                                              sql,
-                                                                                  [
-                                                                                        staff.department_id,
-                                                                                              staff.full_name,
-                                                                                                    staff.position,
-                                                                                                          staff.email,
-                                                                                                                staff.phone,
-                                                                                                                      staff.biography,
-                                                                                                                            staff.image || null,
-                                                                                                                                ],
-                                                                                                                                    callback
-                                                                                                                                      );
-                                                                                                                                      };
+  db.query(
+    sql,
+    [
+      staff.department_id,
+      staff.full_name,
+      staff.position,
+      staff.email,
+      staff.phone,
+      staff.biography,
+      staff.image || null,
+    ],
+    callback,
+  );
+};
 
-                                                                                                                                      const updateStaff = (id, staff, callback) => {
-                                                                                                                                        const sql = `
+const updateStaff = (id, staff, callback) => {
+  const sql = `
                                                                                                                                             UPDATE staff
                                                                                                                                                 SET
                                                                                                                                                       department_id = ?,
@@ -58,34 +54,30 @@ const getAllStaff = (callback) => {
                                                                                                                                                                                               WHERE id = ?
                                                                                                                                                                                                 `;
 
-                                                                                                                                                                                                  db.query(
-                                                                                                                                                                                                      sql,
-                                                                                                                                                                                                          [
-                                                                                                                                                                                                                staff.department_id,
-                                                                                                                                                                                                                      staff.full_name,
-                                                                                                                                                                                                                            staff.position,
-                                                                                                                                                                                                                                  staff.email,
-                                                                                                                                                                                                                                        staff.phone,
-                                                                                                                                                                                                                                              staff.biography,
-                                                                                                                                                                                                                                                    staff.image || null,
-                                                                                                                                                                                                                                                          id,
-                                                                                                                                                                                                                                                              ],
-                                                                                                                                                                                                                                                                  callback
-                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                    };
+  db.query(
+    sql,
+    [
+      staff.department_id,
+      staff.full_name,
+      staff.position,
+      staff.email,
+      staff.phone,
+      staff.biography,
+      staff.image || null,
+      id,
+    ],
+    callback,
+  );
+};
 
-                                                                                                                                                                                                                                                                    const deleteStaff = (id, callback) => {
-                                                                                                                                                                                                                                                                      db.query(
-                                                                                                                                                                                                                                                                          "DELETE FROM staff WHERE id = ?",
-                                                                                                                                                                                                                                                                              [id],
-                                                                                                                                                                                                                                                                                  callback
-                                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                                    };
+const deleteStaff = (id, callback) => {
+  db.query("DELETE FROM staff WHERE id = ?", [id], callback);
+};
 
-                                                                                                                                                                                                                                                                                    module.exports = {
-                                                                                                                                                                                                                                                                                      getAllStaff,
-                                                                                                                                                                                                                                                                                        getStaffById,
-                                                                                                                                                                                                                                                                                          createStaff,
-                                                                                                                                                                                                                                                                                            updateStaff,
-                                                                                                                                                                                                                                                                                              deleteStaff,
-                                                                                                                                                                                                                                                                                              };
+module.exports = {
+  getAllStaff,
+  getStaffById,
+  createStaff,
+  updateStaff,
+  deleteStaff,
+};

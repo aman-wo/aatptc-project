@@ -4,7 +4,6 @@ import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminLogin from "./pages/admin/AdminLogin";
 
-
 import Departments from "./pages/Departments";
 import Programs from "./pages/Programs";
 import Events from "./pages/Events";
@@ -31,53 +30,41 @@ import ContactsManagement from "./pages/admin/ContactsManagement";
 
 function App() {
   return (
-      <Routes>
+    <Routes>
+      {/* Public website */}
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="departments" element={<Departments />} />
+        <Route path="programs" element={<Programs />} />
+        <Route path="events" element={<Events />} />
+        <Route path="staff" element={<Staff />} />
+        <Route path="gallery" element={<Gallery />} />
+        <Route path="downloads" element={<Downloads />} />
+        <Route path="announcements" element={<Announcements />} />
+        <Route path="news" element={<News />} />
+        <Route path="contact" element={<Contact />} />
+      </Route>
 
-            {/* Public website */}
-                  <Route path="/" element={<MainLayout />}>
+      {/* Admin website */}
+      <Route path="/admin/login" element={<AdminLogin />} />
 
-                          <Route index element={<Home />} />
-                                  <Route path="about" element={<About />} />
-                                          <Route path="departments" element={<Departments />} />
-                                                  <Route path="programs" element={<Programs />} />
-                                                          <Route path="events" element={<Events />} />
-                                                                  <Route path="staff" element={<Staff />} />
-                                                                          <Route path="gallery" element={<Gallery />} />
-                                                                                  <Route path="downloads" element={<Downloads />} />
-                                                                                          <Route path="announcements" element={<Announcements />} />
-                                                                                                  <Route path="news" element={<News />} />
-                                                                                                          <Route path="contact" element={<Contact />} />
+      <Route element={<ProtectedAdminRoute />}>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="departments" element={<DepartmentsManagement />} />
+          <Route path="programs" element={<ProgramsManagement />} />
+          <Route path="news" element={<NewsManagement />} />
+          <Route path="events" element={<EventsManagement />} />
+          <Route path="staff" element={<StaffManagement />} />
+          <Route path="gallery" element={<GalleryManagement />} />
+          <Route path="downloads" element={<DownloadsManagement />} />
+          <Route path="announcements" element={<AnnouncementsManagement />} />
+          <Route path="contacts" element={<ContactsManagement />} />
+        </Route>
+      </Route>
+    </Routes>
+  );
+}
 
-                                                                                                                </Route>
-
-                                                                                                                      {/* Admin website */}
-                                                                                                                            <Route path="/admin/login" element={<AdminLogin />} />
-
-                                                                                                                            <Route element={<ProtectedAdminRoute />}>
-                                                                                                                              <Route path="/admin" element={<AdminLayout />}>
-                                                                                                                                  <Route path="dashboard" element={<AdminDashboard />} />
-                                                                                                                                  <Route path="departments" element={<DepartmentsManagement />} />
-                                                                                                                                  <Route path="programs" element={<ProgramsManagement />} />
-                                                                                                                                  <Route path="news" element={<NewsManagement />} />
-                                                                                                                                  <Route path="events" element={<EventsManagement />} />
-                                                                                                                                  <Route path="staff" element={<StaffManagement />} />
-                                                                                                                                  <Route path="gallery" element={<GalleryManagement />} />
-                                                                                                                                  <Route path="downloads" element={<DownloadsManagement />} />
-                                                                                                                                  <Route
-                                                                                                                                    path="announcements"
-                                                                                                                                      element={<AnnouncementsManagement />}
-                                                                                                                                      />
-                                                                                                                                      <Route
-                                                                                                                                        path="contacts"
-                                                                                                                                          element={<ContactsManagement />}
-                                                                                                                                          />
-                                                                                                                                    </Route>
-                                                                                                                                    </Route>
-
-                                                                                                                                              </Routes>
-                                                                                                                                                );
-                                                                                                                                                }
-
-                                                                                                                                                export default App;
-
-                                                                
+export default App;

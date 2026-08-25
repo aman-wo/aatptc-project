@@ -2,117 +2,117 @@ const contact = require("../models/contactModel");
 
 const getAllContacts = (req, res) => {
   contact.getAllContacts((err, results) => {
-      if (err) {
-            return res.status(500).json({
-                    success: false,
-                            message: err.message,
-                                  });
-                                      }
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                          res.json({
-                                                success: true,
-                                                      count: results.length,
-                                                            data: results,
-                                                                });
-                                                                  });
-                                                                  };
+    res.json({
+      success: true,
+      count: results.length,
+      data: results,
+    });
+  });
+};
 
-                                                                  const getContactById = (req, res) => {
-                                                                    const { id } = req.params;
+const getContactById = (req, res) => {
+  const { id } = req.params;
 
-                                                                      contact.getContactById(id, (err, results) => {
-                                                                          if (err) {
-                                                                                return res.status(500).json({
-                                                                                        success: false,
-                                                                                                message: err.message,
-                                                                                                      });
-                                                                                                          }
+  contact.getContactById(id, (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                              if (results.length === 0) {
-                                                                                                                    return res.status(404).json({
-                                                                                                                            success: false,
-                                                                                                                                    message: "Contact not found",
-                                                                                                                                          });
-                                                                                                                                              }
+    if (results.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found",
+      });
+    }
 
-                                                                                                                                                  res.json({
-                                                                                                                                                        success: true,
-                                                                                                                                                              data: results[0],
-                                                                                                                                                                  });
-                                                                                                                                                                    });
-                                                                                                                                                                    };
+    res.json({
+      success: true,
+      data: results[0],
+    });
+  });
+};
 
-                                                                                                                                                                    const createContact = (req, res) => {
-                                                                                                                                                                      contact.createContact(req.body, (err, result) => {
-                                                                                                                                                                          if (err) {
-                                                                                                                                                                                return res.status(500).json({
-                                                                                                                                                                                        success: false,
-                                                                                                                                                                                                message: err.message,
-                                                                                                                                                                                                      });
-                                                                                                                                                                                                          }
+const createContact = (req, res) => {
+  contact.createContact(req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                              res.status(201).json({
-                                                                                                                                                                                                                    success: true,
-                                                                                                                                                                                                                          message: "Contact created successfully",
-                                                                                                                                                                                                                                id: result.insertId,
-                                                                                                                                                                                                                                    });
-                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                      };
+    res.status(201).json({
+      success: true,
+      message: "Contact created successfully",
+      id: result.insertId,
+    });
+  });
+};
 
-                                                                                                                                                                                                                                      const updateContact = (req, res) => {
-                                                                                                                                                                                                                                        const { id } = req.params;
+const updateContact = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                          contact.updateContact(id, req.body, (err, result) => {
-                                                                                                                                                                                                                                              if (err) {
-                                                                                                                                                                                                                                                    return res.status(500).json({
-                                                                                                                                                                                                                                                            success: false,
-                                                                                                                                                                                                                                                                    message: err.message,
-                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                              }
+  contact.updateContact(id, req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                  if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                        return res.status(404).json({
-                                                                                                                                                                                                                                                                                                success: false,
-                                                                                                                                                                                                                                                                                                        message: "Contact not found",
-                                                                                                                                                                                                                                                                                                              });
-                                                                                                                                                                                                                                                                                                                  }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                      res.json({
-                                                                                                                                                                                                                                                                                                                            success: true,
-                                                                                                                                                                                                                                                                                                                                  message: "Contact updated successfully",
-                                                                                                                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                        };
+    res.json({
+      success: true,
+      message: "Contact updated successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                        const deleteContact = (req, res) => {
-                                                                                                                                                                                                                                                                                                                                          const { id } = req.params;
+const deleteContact = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                                                                                                                         contact.deleteContact(id, (err, result) => {
-                                                                                                                                                                                                                                                                                                                                                if (err) {
-                                                                                                                                                                                                                                                                                                                                                      return res.status(500).json({
-                                                                                                                                                                                                                                                                                                                                                              success: false,
-                                                                                                                                                                                                                                                                                                                                                                      message: err.message,
-                                                                                                                                                                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                                                                                                                                                                }
+  contact.deleteContact(id, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                    if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                                                                                                                          return res.status(404).json({
-                                                                                                                                                                                                                                                                                                                                                                                                  success: false,
-                                                                                                                                                                                                                                                                                                                                                                                                          message: "Contact not found",
-                                                                                                                                                                                                                                                                                                                                                                                                                });
-                                                                                                                                                                                                                                                                                                                                                                                                                    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        res.json({
-                                                                                                                                                                                                                                                                                                                                                                                                                              success: true,
-                                                                                                                                                                                                                                                                                                                                                                                                                                    message: "Contact deleted successfully",
-                                                                                                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          };
+    res.json({
+      success: true,
+      message: "Contact deleted successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                          module.exports = {
-                                                                                                                                                                                                                                                                                                                                                                                                                                            getAllContacts,
-                                                                                                                                                                                                                                                                                                                                                                                                                                              getContactById,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                createContact,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  updateContact,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    deleteContact,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    };
+module.exports = {
+  getAllContacts,
+  getContactById,
+  createContact,
+  updateContact,
+  deleteContact,
+};

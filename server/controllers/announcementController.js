@@ -2,117 +2,117 @@ const announcement = require("../models/announcementModel");
 
 const getAllAnnouncements = (req, res) => {
   announcement.getAllAnnouncements((err, results) => {
-      if (err) {
-            return res.status(500).json({
-                    success: false,
-                            message: err.message,
-                                  });
-                                      }
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                          res.json({
-                                                success: true,
-                                                      count: results.length,
-                                                            data: results,
-                                                                });
-                                                                  });
-                                                                  };
+    res.json({
+      success: true,
+      count: results.length,
+      data: results,
+    });
+  });
+};
 
-                                                                  const getSingleAnnouncement = (req, res) => {
-                                                                    const { id } = req.params;
+const getSingleAnnouncement = (req, res) => {
+  const { id } = req.params;
 
-                                                                      announcement.getAnnouncementById(id, (err, results) => {
-                                                                          if (err) {
-                                                                                return res.status(500).json({
-                                                                                        success: false,
-                                                                                                message: err.message,
-                                                                                                      });
-                                                                                                          }
+  announcement.getAnnouncementById(id, (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                              if (results.length === 0) {
-                                                                                                                    return res.status(404).json({
-                                                                                                                            success: false,
-                                                                                                                                    message: " Announcement not found",
-                                                                                                                                          });
-                                                                                                                                              }
+    if (results.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: " Announcement not found",
+      });
+    }
 
-                                                                                                                                                  res.json({
-                                                                                                                                                        success: true,
-                                                                                                                                                              data: results[0],
-                                                                                                                                                                  });
-                                                                                                                                                                    });
-                                                                                                                                                                    };
+    res.json({
+      success: true,
+      data: results[0],
+    });
+  });
+};
 
-                                                                                                                                                                    const createAnnouncement = (req, res) => {
-                                                                                                                                                                      announcement.createAnnouncement(req.body, (err, result) => {
-                                                                                                                                                                          if (err) {
-                                                                                                                                                                                return res.status(500).json({
-                                                                                                                                                                                        success: false,
-                                                                                                                                                                                                message: err.message,
-                                                                                                                                                                                                      });
-                                                                                                                                                                                                          }
+const createAnnouncement = (req, res) => {
+  announcement.createAnnouncement(req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                              res.status(201).json({
-                                                                                                                                                                                                                    success: true,
-                                                                                                                                                                                                                          message: "Announcement created successfully",
-                                                                                                                                                                                                                                id: result.insertId,
-                                                                                                                                                                                                                                    });
-                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                      };
+    res.status(201).json({
+      success: true,
+      message: "Announcement created successfully",
+      id: result.insertId,
+    });
+  });
+};
 
-                                                                                                                                                                                                                                      const updateAnnouncement = (req, res) => {
-                                                                                                                                                                                                                                        const { id } = req.params;
+const updateAnnouncement = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                          announcement.updateAnnouncement(id, req.body, (err, result) => {
-                                                                                                                                                                                                                                              if (err) {
-                                                                                                                                                                                                                                                    return res.status(500).json({
-                                                                                                                                                                                                                                                            success: false,
-                                                                                                                                                                                                                                                                    message: err.message,
-                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                              }
+  announcement.updateAnnouncement(id, req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                  if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                        return res.status(404).json({
-                                                                                                                                                                                                                                                                                                success: false,
-                                                                                                                                                                                                                                                                                                        message: "Announcement not found",
-                                                                                                                                                                                                                                                                                                              });
-                                                                                                                                                                                                                                                                                                                  }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Announcement not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                      res.json({
-                                                                                                                                                                                                                                                                                                                            success: true,
-                                                                                                                                                                                                                                                                                                                                  message: "Announcement updated successfully",
-                                                                                                                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                        };
+    res.json({
+      success: true,
+      message: "Announcement updated successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                        const deleteAnnouncement = (req, res) => {
-                                                                                                                                                                                                                                                                                                                                          const { id } = req.params;
+const deleteAnnouncement = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                                                                                                                            announcement.deleteAnnouncement(id, (err, result) => {
-                                                                                                                                                                                                                                                                                                                                                if (err) {
-                                                                                                                                                                                                                                                                                                                                                      return res.status(500).json({
-                                                                                                                                                                                                                                                                                                                                                              success: false,
-                                                                                                                                                                                                                                                                                                                                                                      message: err.message,
-                                                                                                                                                                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                                                                                                                                                                }
+  announcement.deleteAnnouncement(id, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                    if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                                                                                                                          return res.status(404).json({
-                                                                                                                                                                                                                                                                                                                                                                                                  success: false,
-                                                                                                                                                                                                                                                                                                                                                                                                          message: "Announcement not found",
-                                                                                                                                                                                                                                                                                                                                                                                                                });
-                                                                                                                                                                                                                                                                                                                                                                                                                    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Announcement not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        res.json({
-                                                                                                                                                                                                                                                                                                                                                                                                                              success: true,
-                                                                                                                                                                                                                                                                                                                                                                                                                                    message: "Announcement deleted successfully",
-                                                                                                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          };
+    res.json({
+      success: true,
+      message: "Announcement deleted successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                          module.exports = {
-                                                                                                                                                                                                                                                                                                                                                                                                                                            getAllAnnouncements,
-                                                                                                                                                                                                                                                                                                                                                                                                                                              getSingleAnnouncement,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                createAnnouncement,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  updateAnnouncement,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    deleteAnnouncement,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    };
+module.exports = {
+  getAllAnnouncements,
+  getSingleAnnouncement,
+  createAnnouncement,
+  updateAnnouncement,
+  deleteAnnouncement,
+};

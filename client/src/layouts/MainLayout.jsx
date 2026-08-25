@@ -6,17 +6,17 @@ import Footer from "../components/Footer";
 
 function MainLayout() {
   return (
-      <>
-            <Header />
-                  <Navbar />
+    <>
+      <Header />
+      <Navbar />
 
-                        <main>
-                                <Outlet />
-                                      </main>
+      <main>
+        <Outlet />
+      </main>
 
-                                            <Footer />
-                                                </>
-                                                  );
-                                                  }
+      <Footer />
+    </>
+  );
+}
 
-                                                  export default MainLayout;
+export default MainLayout;

@@ -5,92 +5,83 @@ import { Link } from "react-router-dom";
 
 function GalleryPreview() {
   const [gallery, setGallery] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            const fetchGallery = async () => {
-                  try {
-                          const response = await api.get("/gallery");
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const response = await api.get("/gallery");
 
-                                  setGallery(response.data.data);
-                                        } catch (error) {
-                                                console.error(error);
-                                                        setError("Unable to load gallery.");
-                                                              } finally {
-                                                                      setLoading(false);
-                                                                            }
-                                                                                };
+        setGallery(response.data.data);
+      } catch (error) {
+        console.error(error);
+        setError("Unable to load gallery.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                                                                                    fetchGallery();
-                                                                                      }, []);
+    fetchGallery();
+  }, []);
 
-                                                                                        if (loading) {
-                                                                                            return (
-                                                                                                  <section className="section gallery-preview">
-                                                                                                          <div className="container">
-                                                                                                                    <div className="section-heading">
-                                                                                                                                <p className="section-subtitle">Our Gallery</p>
-                                                                                                                                            <h2>Campus Life</h2>
-                                                                                                                                                        <p>Loading gallery...</p>
-                                                                                                                                                                  </div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                                </section>
-                                                                                                                                                                                    );
-                                                                                                                                                                                      }
+  if (loading) {
+    return (
+      <section className="section gallery-preview">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Our Gallery</p>
+            <h2>Campus Life</h2>
+            <p>Loading gallery...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                        if (error) {
-                                                                                                                                                                                            return (
-                                                                                                                                                                                                  <section className="section gallery-preview">
-                                                                                                                                                                                                          <div className="container">
-                                                                                                                                                                                                                    <div className="section-heading">
-                                                                                                                                                                                                                                <p className="section-subtitle">Our Gallery</p>
-                                                                                                                                                                                                                                            <h2>Campus Life</h2>
-                                                                                                                                                                                                                                                        <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                                      }
+  if (error) {
+    return (
+      <section className="section gallery-preview">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Our Gallery</p>
+            <h2>Campus Life</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                        return (
-                                                                                                                                                                                                                                                                                            <section className="section gallery-preview">
-                                                                                                                                                                                                                                                                                                  <div className="container">
+  return (
+    <section className="section gallery-preview">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Our Gallery</p>
 
-                                                                                                                                                                                                                                                                                                          <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                    <p className="section-subtitle">Our Gallery</p>
+          <h2>Campus Life</h2>
 
-                                                                                                                                                                                                                                                                                                                              <h2>Campus Life</h2>
+          <p>Explore activities, events, and moments from AATPTC.</p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                                                                                    Explore activities, events, and moments from AATPTC.
-                                                                                                                                                                                                                                                                                                                                                              </p>
-                                                                                                                                                                                                                                                                                                                                                                      </div>
+        {gallery.length === 0 ? (
+          <p className="empty-message">No gallery items available.</p>
+        ) : (
+          <div className="gallery-grid">
+            {gallery.slice(0, 3).map((item) => (
+              <GalleryCard key={item.id} item={item} />
+            ))}
+          </div>
+        )}
 
-                                                                                                                                                                                                                                                                                                                                                                              {gallery.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                        <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                    No gallery items available.
-                                                                                                                                                                                                                                                                                                                                                                                                              </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                      ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                <div className="gallery-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                            {gallery.slice(0, 3).map((item) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          <GalleryCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          key={item.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          item={item}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      )}
+        <div className="preview-action">
+          <Link to="/gallery" className="btn-primary">
+            View All Gallery
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <div className="preview-action">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <Link to="/gallery" className="btn-primary">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    View All Gallery
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </Link>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  export default GalleryPreview;
+export default GalleryPreview;

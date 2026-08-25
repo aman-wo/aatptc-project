@@ -1,8 +1,7 @@
 const db = require("../config/database");
 
 exports.getStats = (callback) => {
-
-    const sql = `
+  const sql = `
             SELECT
                         (SELECT COUNT(*) FROM departments) AS departments,
                                     (SELECT COUNT(*) FROM programs) AS programs,
@@ -14,6 +13,5 @@ exports.getStats = (callback) => {
                                                                                                             (SELECT COUNT(*) FROM contacts) AS contacts
                                                                                                                 `;
 
-                                                                                                                    db.query(sql, callback);
-
-                                                                                                                    };
+  db.query(sql, callback);
+};

@@ -4,86 +4,77 @@ import GalleryCard from "../components/gallery/GalleryCard";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            const fetchGallery = async () => {
-                  try {
-                          const response = await api.get("/gallery");
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const response = await api.get("/gallery");
 
-                                  setGallery(response.data.data);
-                                        } catch (err) {
-                                                console.error(err);
-                                                        setError("Failed to load gallery.");
-                                                              } finally {
-                                                                      setLoading(false);
-                                                                            }
-                                                                                };
+        setGallery(response.data.data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load gallery.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                                                                                    fetchGallery();
-                                                                                      }, []);
+    fetchGallery();
+  }, []);
 
-                                                                                        if (loading) {
-                                                                                            return (
-                                                                                                  <section className="section gallery-page">
-                                                                                                          <div className="container">
-                                                                                                                    <div className="section-heading">
-                                                                                                                                <p className="section-subtitle">Our Gallery</p>
-                                                                                                                                            <h2>College Gallery</h2>
-                                                                                                                                                        <p>Loading gallery...</p>
-                                                                                                                                                                  </div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                                </section>
-                                                                                                                                                                                    );
-                                                                                                                                                                                      }
+  if (loading) {
+    return (
+      <section className="section gallery-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Our Gallery</p>
+            <h2>College Gallery</h2>
+            <p>Loading gallery...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                        if (error) {
-                                                                                                                                                                                            return (
-                                                                                                                                                                                                  <section className="section gallery-page">
-                                                                                                                                                                                                          <div className="container">
-                                                                                                                                                                                                                    <div className="section-heading">
-                                                                                                                                                                                                                                <p className="section-subtitle">Our Gallery</p>
-                                                                                                                                                                                                                                            <h2>College Gallery</h2>
-                                                                                                                                                                                                                                                        <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                                      }
+  if (error) {
+    return (
+      <section className="section gallery-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Our Gallery</p>
+            <h2>College Gallery</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                        return (
-                                                                                                                                                                                                                                                                                            <section className="section gallery-page">
-                                                                                                                                                                                                                                                                                                  <div className="container">
+  return (
+    <section className="section gallery-page">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Our Gallery</p>
 
-                                                                                                                                                                                                                                                                                                          <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                    <p className="section-subtitle">Our Gallery</p>
+          <h2>College Gallery</h2>
 
-                                                                                                                                                                                                                                                                                                                              <h2>College Gallery</h2>
+          <p>Explore photos and moments from AATPTC.</p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                                                                                    Explore photos and moments from AATPTC.
-                                                                                                                                                                                                                                                                                                                                                              </p>
-                                                                                                                                                                                                                                                                                                                                                                      </div>
+        {gallery.length === 0 ? (
+          <p className="empty-message">No gallery images found.</p>
+        ) : (
+          <div className="gallery-grid">
+            {gallery.map((item) => (
+              <GalleryCard key={item.id} item={item} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
 
-                                                                                                                                                                                                                                                                                                                                                                              {gallery.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                        <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                    No gallery images found.
-                                                                                                                                                                                                                                                                                                                                                                                                              </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                      ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                <div className="gallery-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                            {gallery.map((item) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          <GalleryCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          key={item.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          item={item}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  };
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  export default Gallery;
+export default Gallery;

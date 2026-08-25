@@ -13,11 +13,10 @@ const downloadRoutes = require("./routes/downloadRoutes");
 const announcementRoutes = require("./routes/announcementRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const path = require("path");
-const dashboardRoutes = require("./routes/dashboardRoutes.js")
+const dashboardRoutes = require("./routes/dashboardRoutes.js");
 const settingsRoutes = require("./routes/settingsRoutes.js");
 
 const app = express();
-
 
 // Connect to database
 require("./config/database.js");
@@ -37,21 +36,16 @@ app.use("/api/announcements", announcementRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/settings", settingsRoutes);
-app.use(
-  "/uploads",
-    express.static(
-        path.join(__dirname, "uploads")
-          )
-          );
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Test Route
 app.get("/", (req, res) => {
   res.send("AATPTC College API is Running...");
-  });
-  app.use(errorHandler);
+});
+app.use(errorHandler);
 
-  const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    });
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});

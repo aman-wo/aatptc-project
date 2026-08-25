@@ -1,124 +1,123 @@
-
 const gallery = require("../models/galleryModel");
 
 const getGalleries = (req, res) => {
   gallery.getAllGalleries((err, results) => {
-      if (err) {
-            return res.status(500).json({
-                    success: false,
-                            message: err.message,
-                                  });
-                                      }
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                          res.json({
-                                                success: true,
-                                                      count: results.length,
-                                                            data: results,
-                                                                });
-                                                                  });
-                                                                  };
+    res.json({
+      success: true,
+      count: results.length,
+      data: results,
+    });
+  });
+};
 
-                                                                  const getSingleGallery = (req, res) => {
-                                                                    const { id } = req.params;
+const getSingleGallery = (req, res) => {
+  const { id } = req.params;
 
-                                                                      gallery.getGalleryById(id, (err, results) => {
-                                                                          if (err) {
-                                                                                return res.status(500).json({
-                                                                                        success: false,
-                                                                                                message: err.message,
-                                                                                                      });
-                                                                                                          }
+  gallery.getGalleryById(id, (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                              if (results.length === 0) {
-                                                                                                                    return res.status(404).json({
-                                                                                                                            success: false,
-                                                                                                                                    message: "gallery not found",
-                                                                                                                                          });
-                                                                                                                                              }
+    if (results.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "gallery not found",
+      });
+    }
 
-                                                                                                                                                  res.json({
-                                                                                                                                                        success: true,
-                                                                                                                                                              data: results[0],
-                                                                                                                                                                  });
-                                                                                                                                                                    });
-                                                                                                                                                                    };
+    res.json({
+      success: true,
+      data: results[0],
+    });
+  });
+};
 
-                                                                                                                                                                    const createGallery = (req, res) => {
-                                                                                                                                                                        const galleryData = {
-                                                                                                                                                                                  ...req.body,
-                                                                                                                                                                                      image: req.file ? req.file.filename : null,
-                                                                                                                                                                                        };
-                                                                                                                                                                        
-                                                                                                                                                                      gallery.createGallery(galleryData, (err, result) => {
-                                                                                                                                                                          if (err) {
-                                                                                                                                                                                return res.status(500).json({
-                                                                                                                                                                                        success: false,
-                                                                                                                                                                                                message: err.message,
-                                                                                                                                                                                                      });
-                                                                                                                                                                                                          }
+const createGallery = (req, res) => {
+  const galleryData = {
+    ...req.body,
+    image: req.file ? req.file.filename : null,
+  };
 
-                                                                                                                                                                                                              res.status(201).json({
-                                                                                                                                                                                                                    success: true,
-                                                                                                                                                                                                                          message: "gallery created successfully",
-                                                                                                                                                                                                                                id: result.insertId,
-                                                                                                                                                                                                                                    });
-                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                      };
+  gallery.createGallery(galleryData, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                      const updateGallery = (req, res) => {
-                                                                                                                                                                                                                                        const { id } = req.params;
+    res.status(201).json({
+      success: true,
+      message: "gallery created successfully",
+      id: result.insertId,
+    });
+  });
+};
 
-                                                                                                                                                                                                                                          gallery.updateGallery(id, req.body, (err, result) => {
-                                                                                                                                                                                                                                              if (err) {
-                                                                                                                                                                                                                                                    return res.status(500).json({
-                                                                                                                                                                                                                                                            success: false,
-                                                                                                                                                                                                                                                                    message: err.message,
-                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                              }
+const updateGallery = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                                                                  if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                        return res.status(404).json({
-                                                                                                                                                                                                                                                                                                success: false,
-                                                                                                                                                                                                                                                                                                        message: "gallery not found",
-                                                                                                                                                                                                                                                                                                              });
-                                                                                                                                                                                                                                                                                                                  }
+  gallery.updateGallery(id, req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                      res.json({
-                                                                                                                                                                                                                                                                                                                            success: true,
-                                                                                                                                                                                                                                                                                                                                  message: "gallery updated successfully",
-                                                                                                                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                        };
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "gallery not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                        const deleteGallery = (req, res) => {
-                                                                                                                                                                                                                                                                                                                                          const { id } = req.params;
+    res.json({
+      success: true,
+      message: "gallery updated successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                            gallery.deleteGallery(id, (err, result) => {
-                                                                                                                                                                                                                                                                                                                                                if (err) {
-                                                                                                                                                                                                                                                                                                                                                      return res.status(500).json({
-                                                                                                                                                                                                                                                                                                                                                              success: false,
-                                                                                                                                                                                                                                                                                                                                                                      message: err.message,
-                                                                                                                                                                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                                                                                                                                                                }
+const deleteGallery = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                                                                                                                                                                    if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                                                                                                                          return res.status(404).json({
-                                                                                                                                                                                                                                                                                                                                                                                                  success: false,
-                                                                                                                                                                                                                                                                                                                                                                                                          message: "gallery not found",
-                                                                                                                                                                                                                                                                                                                                                                                                                });
-                                                                                                                                                                                                                                                                                                                                                                                                                    }
+  gallery.deleteGallery(id, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        res.json({
-                                                                                                                                                                                                                                                                                                                                                                                                                              success: true,
-                                                                                                                                                                                                                                                                                                                                                                                                                                    message: "gallery deleted successfully",
-                                                                                                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          };
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "gallery not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                          module.exports = {
-                                                                                                                                                                                                                                                                                                                                                                                                                                            getGalleries,
-                                                                                                                                                                                                                                                                                                                                                                                                                                              getSingleGallery,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                createGallery,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  updateGallery,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    deleteGallery,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    };
+    res.json({
+      success: true,
+      message: "gallery deleted successfully",
+    });
+  });
+};
+
+module.exports = {
+  getGalleries,
+  getSingleGallery,
+  createGallery,
+  updateGallery,
+  deleteGallery,
+};

@@ -4,103 +4,96 @@ import DepartmentCard from "../departments/DepartmentCard";
 import { Link } from "react-router-dom";
 
 function DepartmentsPreview() {
-        const departmentImages = {
-                  Automotive:
-                      "https://raw.githubusercontent.com/aman-wo/Image/main/Automotive.jpg",
+  const departmentImages = {
+    Automotive:
+      "https://raw.githubusercontent.com/aman-wo/Image/main/Automotive.jpg",
 
-                        "Information Technology":
-                            "https://raw.githubusercontent.com/aman-wo/Image/main/ICT.jpg",
+    "Information Technology":
+      "https://raw.githubusercontent.com/aman-wo/Image/main/ICT.jpg",
 
-                              Manufacturing:
-                                  "https://raw.githubusercontent.com/aman-wo/Image/main/Manufacturing.jpg",
-                                  };
-        
+    Manufacturing:
+      "https://raw.githubusercontent.com/aman-wo/Image/main/Manufacturing.jpg",
+  };
+
   const [departments, setDepartments] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            api
-                  .get("/departments")
-                        .then((response) => {
-                                setDepartments(response.data.data);
-                                        setLoading(false);
-                                              })
-                                                    .catch((error) => {
-                                                            console.error(error);
-                                                                    setError("Unable to load departments.");
-                                                                            setLoading(false);
-                                                                                  });
-                                                                                    }, []);
+  useEffect(() => {
+    api
+      .get("/departments")
+      .then((response) => {
+        setDepartments(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("Unable to load departments.");
+        setLoading(false);
+      });
+  }, []);
 
-                                                                                      if (loading) {
-                                                                                          return (
-                                                                                                <section className="section departments-preview">
-                                                                                                        <div className="container">
-                                                                                                                  <div className="section-heading">
-                                                                                                                              <p className="section-subtitle">Academic Areas</p>
-                                                                                                                                          <h2>Our Departments</h2>
-                                                                                                                                                      <p>Loading departments...</p>
-                                                                                                                                                                </div>
-                                                                                                                                                                        </div>
-                                                                                                                                                                              </section>
-                                                                                                                                                                                  );
-                                                                                                                                                                                    }
+  if (loading) {
+    return (
+      <section className="section departments-preview">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Academic Areas</p>
+            <h2>Our Departments</h2>
+            <p>Loading departments...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                      if (error) {
-                                                                                                                                                                                          return (
-                                                                                                                                                                                                <section className="section departments-preview">
-                                                                                                                                                                                                        <div className="container">
-                                                                                                                                                                                                                  <div className="section-heading">
-                                                                                                                                                                                                                              <p className="section-subtitle">Academic Areas</p>
-                                                                                                                                                                                                                                          <h2>Our Departments</h2>
-                                                                                                                                                                                                                                                      <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                              </section>
-                                                                                                                                                                                                                                                                                  );
-                                                                                                                                                                                                                                                                                    }
+  if (error) {
+    return (
+      <section className="section departments-preview">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Academic Areas</p>
+            <h2>Our Departments</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                      return (
-                                                                                                                                                                                                                                                                                          <section className="section departments-preview">
-                                                                                                                                                                                                                                                                                                <div className="container">
+  return (
+    <section className="section departments-preview">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Academic Areas</p>
 
-                                                                                                                                                                                                                                                                                                        <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                  <p className="section-subtitle">Academic Areas</p>
+          <h2>Our Departments</h2>
 
-                                                                                                                                                                                                                                                                                                                            <h2>Our Departments</h2>
+          <p>Explore the departments and areas of study available at AATPTC.</p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                      <p>
-                                                                                                                                                                                                                                                                                                                                                  Explore the departments and areas of study
-                                                                                                                                                                                                                                                                                                                                                              available at AATPTC.
-                                                                                                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                                                                                                                </div>
+        {departments.length === 0 ? (
+          <p className="empty-message">No departments available.</p>
+        ) : (
+          <div className="departments-grid">
+            {departments.slice(0, 3).map((item) => (
+              <DepartmentCard
+                key={item.id}
+                department={item}
+                image={departmentImages[item.name]}
+              />
+            ))}
+          </div>
+        )}
 
-                                                                                                                                                                                                                                                                                                                                                                                        {departments.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                                  <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                              No departments available.
-                                                                                                                                                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                          <div className="departments-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                      {departments.slice(0, 3).map((item) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <DepartmentCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    key={item.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    department={item}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    image={departmentImages[item.name]}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                )}
+        <div className="preview-action">
+          <Link to="/departments" className="btn-primary">
+            View All Departments
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div className="preview-action">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <Link to="/departments" className="btn-primary">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              View All Departments
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </Link>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            export default DepartmentsPreview;
+export default DepartmentsPreview;

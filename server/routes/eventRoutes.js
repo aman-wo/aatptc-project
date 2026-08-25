@@ -1,20 +1,19 @@
-const express=require("express");
-const router=express.Router();
+const express = require("express");
+const router = express.Router();
 const createUpload = require("../middleware/uploadMiddleware");
 const uploadEvent = createUpload("events");
 
-
 const {
-getEvents,
-getEvent,
-createEvent, updateEvent, deleteEvent
-}=require("../controllers/eventController");
+  getEvents,
+  getEvent,
+  createEvent,
+  updateEvent,
+  deleteEvent,
+} = require("../controllers/eventController");
 
+const verifyToken = require("../middleware/authMiddleware");
 
-const verifyToken=require("../middleware/authMiddleware");
-
-const isAdmin=require("../middleware/adminMiddleware");
-
+const isAdmin = require("../middleware/adminMiddleware");
 
 const validateEvent = require("../validation/eventValidation");
 router.get("/", getEvents);
@@ -23,24 +22,14 @@ router.get("/:slug", getEvent);
 
 router.post(
   "/",
-    verifyToken,
-      isAdmin,
-      uploadEvent.single("image"),
-        validateEvent,
-          createEvent
-          );
+  verifyToken,
+  isAdmin,
+  uploadEvent.single("image"),
+  validateEvent,
+  createEvent,
+);
 
-          router.put(
-            "/:slug",
-              verifyToken,
-                isAdmin,
-                  validateEvent,
-                    updateEvent
-                    );
+router.put("/:slug", verifyToken, isAdmin, validateEvent, updateEvent);
 
-                    router.delete(
-                      "/:slug",
-                        verifyToken,
-                          isAdmin, deleteEvent
-                    );
-  module.exports = router;                  
+router.delete("/:slug", verifyToken, isAdmin, deleteEvent);
+module.exports = router;

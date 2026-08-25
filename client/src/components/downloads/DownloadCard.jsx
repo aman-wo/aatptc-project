@@ -1,40 +1,32 @@
 const DownloadCard = ({ item }) => {
-        const fileUrl =
-            `${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/downloads/${item.file_name}`;
+  const fileUrl = `${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/downloads/${item.file_name}`;
 
-              return (
-                  <article className="content-card download-card">
-                        <div className="content-card-body">
+  return (
+    <article className="content-card download-card">
+      <div className="content-card-body">
+        <span className="card-label">{item.category || "Resource"}</span>
 
-                                <span className="card-label">
-                                          {item.category || "Resource"}
-                                                  </span>
+        <h3>{item.title}</h3>
 
-                                                          <h3>{item.title}</h3>
+        {item.description && <p>{item.description}</p>}
 
-                                                                  {item.description && (
-                                                                            <p>{item.description}</p>
-                                                                                    )}
+        <div className="card-meta">
+          <span>
+            {item.file_type} · {item.file_size}
+          </span>
+        </div>
 
-                                                                                            <div className="card-meta">
-                                                                                                      <span>
-                                                                                                                  {item.file_type} · {item.file_size}
-                                                                                                                            </span>
-                                                                                                                                    </div>
+        <a
+          className="card-button"
+          href={fileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Download
+        </a>
+      </div>
+    </article>
+  );
+};
 
-                                                                                                                                            <a
-                                                                                                                                                      className="card-button"
-                                                                                                                                                                href={fileUrl}
-                                                                                                                                                                          target="_blank"
-                                                                                                                                                                                    rel="noopener noreferrer"
-                                                                                                                                                                                            >
-                                                                                                                                                                                                      Download
-                                                                                                                                                                                                              </a>
-
-                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                        </article>
-                                                                                                                                                                                                                          );
-                                                                                                                                                                                                                          };
-
-                                                                                                                                                                                                                          export default DownloadCard;
-
+export default DownloadCard;

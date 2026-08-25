@@ -4,88 +4,80 @@ import ProgramCard from "../components/programs/ProgramCard";
 
 function Programs() {
   const [programs, setPrograms] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            api.get("/programs")
-                  .then((response) => {
-                          setPrograms(
-                                    Array.isArray(response.data)
-                                                ? response.data
-                                                            : response.data.data
-                                                                    );
+  useEffect(() => {
+    api
+      .get("/programs")
+      .then((response) => {
+        setPrograms(
+          Array.isArray(response.data) ? response.data : response.data.data,
+        );
 
-                                                                            setLoading(false);
-                                                                                  })
-                                                                                        .catch((error) => {
-                                                                                                console.error(error);
-                                                                                                        setError("Unable to load programs.");
-                                                                                                                setLoading(false);
-                                                                                                                      });
-                                                                                                                        }, []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("Unable to load programs.");
+        setLoading(false);
+      });
+  }, []);
 
-                                                                                                                          if (loading) {
-                                                                                                                              return (
-                                                                                                                                    <section className="section programs-page">
-                                                                                                                                            <div className="container">
-                                                                                                                                                      <div className="section-heading">
-                                                                                                                                                                  <p className="section-subtitle">Academic Programs</p>
-                                                                                                                                                                              <h2>Our Programs</h2>
-                                                                                                                                                                                          <p>Loading programs...</p>
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                  </section>
-                                                                                                                                                                                                                      );
-                                                                                                                                                                                                                        }
+  if (loading) {
+    return (
+      <section className="section programs-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Academic Programs</p>
+            <h2>Our Programs</h2>
+            <p>Loading programs...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                          if (error) {
-                                                                                                                                                                                                                              return (
-                                                                                                                                                                                                                                    <section className="section programs-page">
-                                                                                                                                                                                                                                            <div className="container">
-                                                                                                                                                                                                                                                      <div className="section-heading">
-                                                                                                                                                                                                                                                                  <p className="section-subtitle">Academic Programs</p>
-                                                                                                                                                                                                                                                                              <h2>Our Programs</h2>
-                                                                                                                                                                                                                                                                                          <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                  </section>
-                                                                                                                                                                                                                                                                                                                      );
-                                                                                                                                                                                                                                                                                                                        }
+  if (error) {
+    return (
+      <section className="section programs-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Academic Programs</p>
+            <h2>Our Programs</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                                                          return (
-                                                                                                                                                                                                                                                                                                                              <section className="section programs-page">
-                                                                                                                                                                                                                                                                                                                                    <div className="container">
+  return (
+    <section className="section programs-page">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Academic Programs</p>
 
-                                                                                                                                                                                                                                                                                                                                            <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                                                      <p className="section-subtitle">Academic Programs</p>
+          <h2>Our Programs</h2>
 
-                                                                                                                                                                                                                                                                                                                                                                <h2>Our Programs</h2>
+          <p>
+            Discover programs designed to develop practical and professional
+            skills.
+          </p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                                                          <p>
-                                                                                                                                                                                                                                                                                                                                                                                      Discover programs designed to develop practical
-                                                                                                                                                                                                                                                                                                                                                                                                  and professional skills.
-                                                                                                                                                                                                                                                                                                                                                                                                            </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+        {programs.length === 0 ? (
+          <p className="empty-message">No programs available.</p>
+        ) : (
+          <div className="programs-grid">
+            {programs.map((item) => (
+              <ProgramCard key={item.id} program={item} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                            {programs.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                                                                      <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  No programs available.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <div className="programs-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {programs.map((item) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <ProgramCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        key={item.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        program={item}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                export default Programs;
+export default Programs;

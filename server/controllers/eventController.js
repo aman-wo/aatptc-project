@@ -1,141 +1,118 @@
 const Event = require("../models/eventModel");
 
 const getEvents = (req, res) => {
-
   Event.getAllEvents((err, results) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-      if (err) {
-            return res.status(500).json({
-                    success: false,
-                            message: err.message,
-                                  });
-                                      }
-
-
-                                          res.json({
-                                                success: true,
-                                                      count: results.length,
-                                                            data: results,
-                                                                });
-
-                                                                  });
-
-                                                                  };
-
+    res.json({
+      success: true,
+      count: results.length,
+      data: results,
+    });
+  });
+};
 
 const getEvent = (req, res) => {
+  const { slug } = req.params;
 
-        const { slug } = req.params;
-
-          Event.getEventBySlug(slug, (err, results)=>{
-
-              if(err){
-                    return res.status(500).json({
-                            success:false,
-                                    message:err.message
-                                          });
-                                              }
-
-
-                                                  if(results.length === 0){
-
-                                                        return res.status(404).json({
-                                                                success:false,
-                                                                        message:"Event not found"
-                                                                              });
-
-                                                                                  }
-
-
-                                                                                      res.json({
-                                                                                            success:true,
-                                                                                                  data:results[0]
-                                                                                                      });
-
-                                                                                                        });
-
-                                                                                                        };
-
-
-
-const createEvent = (req,res)=>{
-
-      Event.createEvent(req.body,(err,result)=>{
-
-
-      if(err){
-
+  Event.getEventBySlug(slug, (err, results) => {
+    if (err) {
       return res.status(500).json({
-      success:false,
-      message:err.message
+        success: false,
+        message: err.message,
       });
+    }
 
-      }
-
-
-      res.status(201).json({
-
-      success:true,
-      message:"Event created successfully",
-      id:result.insertId
-
+    if (results.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Event not found",
       });
+    }
 
+    res.json({
+      success: true,
+      data: results[0],
+    });
+  });
+};
 
+const createEvent = (req, res) => {
+  Event.createEvent(req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
       });
+    }
 
-      };
+    res.status(201).json({
+      success: true,
+      message: "Event created successfully",
+      id: result.insertId,
+    });
+  });
+};
 
 const updateEvent = (req, res) => {
-        const { slug } = req.params;
+  const { slug } = req.params;
 
-          Event.updateEvent(slug, req.body, (err, result) => {
-              if (err) {
-                    return res.status(500).json({
-                            success: false,
-                                    message: err.message,
-                                          });
-                                              }
+  Event.updateEvent(slug, req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                  if (result.affectedRows === 0) {
-                                                        return res.status(404).json({
-                                                                success: false,
-                                                                        message: "Event not found",
-                                                                              });
-                                                                                  }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Event not found",
+      });
+    }
 
-                                                                                      res.json({
-                                                                                            success: true,
-                                                                                                  message: "Event updated successfully",
-                                                                                                      });
-                                                                                                        });
-                                                                                                        };
+    res.json({
+      success: true,
+      message: "Event updated successfully",
+    });
+  });
+};
 
-                                                                                                        const deleteEvent = (req, res) => {
-                                                                                                          const { slug } = req.params;
+const deleteEvent = (req, res) => {
+  const { slug } = req.params;
 
-                                                                                                            Event.deleteEvent(slug, (err, result) => {
-                                                                                                                if (err) {
-                                                                                                                      return res.status(500).json({
-                                                                                                                              success: false,
-                                                                                                                                      message: err.message,
-                                                                                                                                            });
-                                                                                                                                                }
+  Event.deleteEvent(slug, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                    if (result.affectedRows === 0) {
-                                                                                                                                                          return res.status(404).json({
-                                                                                                                                                                  success: false,
-                                                                                                                                                                          message: "Event not found",
-                                                                                                                                                                                });
-                                                                                                                                                                                    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Event not found",
+      });
+    }
 
-                                                                                                                                                                                        res.json({
-                                                                                                                                                                                              success: true,
-                                                                                                                                                                                                    message: "Event deleted successfully",
-                                                                                                                                                                                                        });
-                                                                                                                                                                                                          });
-                                                                                                                                                                                                          };
+    res.json({
+      success: true,
+      message: "Event deleted successfully",
+    });
+  });
+};
 
-                                                                  module.exports = {
-                                                                    getEvents, getEvent, createEvent, updateEvent, deleteEvent
-                                                                    };
+module.exports = {
+  getEvents,
+  getEvent,
+  createEvent,
+  updateEvent,
+  deleteEvent,
+};

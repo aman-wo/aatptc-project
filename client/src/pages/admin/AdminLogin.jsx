@@ -4,111 +4,99 @@ import api from "../../services/api";
 
 function AdminLogin() {
   const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-      const [error, setError] = useState("");
-        const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-          const navigate = useNavigate();
+  const navigate = useNavigate();
 
-            const handleSubmit = async (e) => {
-                e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-                    setError("");
-                        setLoading(true);
+    setError("");
+    setLoading(true);
 
-                            try {
-                                  const response = await api.post("/auth/login", {
-                                          email,
-                                                  password,
-                                                        });
+    try {
+      const response = await api.post("/auth/login", {
+        email,
+        password,
+      });
 
-                                                              localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.token);
 
-                                                                    console.log("Login response:", response.data);
+      console.log("Login response:", response.data);
 
-                                                                          navigate("/admin/dashboard");
-                                                                              } catch (error) {
-                                                                                    console.error("Login failed:", error);
+      navigate("/admin/dashboard");
+    } catch (error) {
+      console.error("Login failed:", error);
 
-                                                                                          setError(
-                                                                                                  error.response?.data?.message ||
-                                                                                                          "Invalid email or password. Please try again."
-                                                                                                                );
-                                                                                                                    } finally {
-                                                                                                                          setLoading(false);
-                                                                                                                              }
-                                                                                                                                };
+      setError(
+        error.response?.data?.message ||
+          "Invalid email or password. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                                                                                                                                  return (
-                                                                                                                                      <div className="admin-login-page">
-                                                                                                                                            <div className="admin-login-card">
+  return (
+    <div className="admin-login-page">
+      <div className="admin-login-card">
+        <div className="admin-login-header">
+          <div className="admin-login-logo">AATPTC</div>
 
-                                                                                                                                                    <div className="admin-login-header">
-                                                                                                                                                              <div className="admin-login-logo">
-                                                                                                                                                                          AATPTC
-                                                                                                                                                                                    </div>
+          <h1>Admin Portal</h1>
 
-                                                                                                                                                                                              <h1>Admin Portal</h1>
+          <p>Sign in to manage the college website</p>
+        </div>
 
-                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                    Sign in to manage the college website
-                                                                                                                                                                                                                              </p>
-                                                                                                                                                                                                                                      </div>
+        {error && <div className="admin-login-error">{error}</div>}
 
-                                                                                                                                                                                                                                              {error && (
-                                                                                                                                                                                                                                                        <div className="admin-login-error">
-                                                                                                                                                                                                                                                                    {error}
-                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                      )}
+        <form onSubmit={handleSubmit} className="admin-login-form">
+          <div className="admin-form-group">
+            <label htmlFor="email">Email Address</label>
 
-                                                                                                                                                                                                                                                                                              <form onSubmit={handleSubmit} className="admin-login-form">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-                                                                                                                                                                                                                                                                                                        <div className="admin-form-group">
-                                                                                                                                                                                                                                                                                                                    <label htmlFor="email">Email Address</label>
+          <div className="admin-form-group">
+            <label htmlFor="password">Password</label>
 
-                                                                                                                                                                                                                                                                                                                                <input
-                                                                                                                                                                                                                                                                                                                                              type="email"
-                                                                                                                                                                                                                                                                                                                                                            id="email"
-                                                                                                                                                                                                                                                                                                                                                                          name="email"
-                                                                                                                                                                                                                                                                                                                                                                                        placeholder="Enter your email"
-                                                                                                                                                                                                                                                                                                                                                                                                      value={email}
-                                                                                                                                                                                                                                                                                                                                                                                                                    onChange={(e) => setEmail(e.target.value)}
-                                                                                                                                                                                                                                                                                                                                                                                                                                  required
-                                                                                                                                                                                                                                                                                                                                                                                                                                              />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <div className="admin-form-group">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <label htmlFor="password">Password</label>
+          <button
+            type="submit"
+            className="admin-login-button"
+            disabled={loading}
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <input
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        type="password"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      id="password"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    name="password"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  placeholder="Enter your password"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                value={password}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              onChange={(e) => setPassword(e.target.value)}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            required
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
+        <div className="admin-login-footer">
+          <p>AATPTC College Website</p>
+          <span>Administrative Portal</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <button
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        type="submit"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    className="admin-login-button"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                disabled={loading}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          >
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {loading ? "Signing in..." : "Sign In"}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </button>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </form>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div className="admin-login-footer">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <p>AATPTC College Website</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <span>Administrative Portal</span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        export default AdminLogin;
+export default AdminLogin;

@@ -1,10 +1,9 @@
 const db = require("../config/database.js");
 
 getAllNews = (page, limit, search, sort, order, callback) => {
+  const offset = (page - 1) * limit;
 
-      const offset = (page - 1) * limit;
-
-          const sql = `
+  const sql = `
                   SELECT *
                           FROM news
                                   WHERE title LIKE ?
@@ -12,42 +11,31 @@ getAllNews = (page, limit, search, sort, order, callback) => {
                                                   LIMIT ? OFFSET ?
                                                       `;
 
-                                                          db.query(
-                                                                  sql,
-                                                                          [`%${search}%`, limit, offset],
-                                                                                  callback
-                                                                                      );
-
-                                                                                      };
-
+  db.query(sql, [`%${search}%`, limit, offset], callback);
+};
 
 const getNewsBySlug = (slug, callback) => {
-    const sql = "SELECT * FROM news WHERE slug = ?";
+  const sql = "SELECT * FROM news WHERE slug = ?";
 
-      db.query(sql, [slug], callback);
-      };
+  db.query(sql, [slug], callback);
+};
 
-      const createNews = (news, callback) => {
-        const sql = `
+const createNews = (news, callback) => {
+  const sql = `
             INSERT INTO news
                 (title, slug, content, image)
                     VALUES (?, ?, ?, ?)
                       `;
 
-                        db.query(
-                            sql,
-                                [
-                                      news.title,
-                                            news.slug,
-                                                  news.content,
-                                                        news.image || null,
-                                                            ],
-                                                                callback
-                                                                  );
-                                                                  };
+  db.query(
+    sql,
+    [news.title, news.slug, news.content, news.image || null],
+    callback,
+  );
+};
 
-                                                                  const updateNews = (slug, news, callback) => {
-                                                                    const sql = `
+const updateNews = (slug, news, callback) => {
+  const sql = `
                                                                         UPDATE news
                                                                             SET
                                                                                   title = ?,
@@ -56,30 +44,19 @@ const getNewsBySlug = (slug, callback) => {
                                                                                                   WHERE slug = ?
                                                                                                     `;
 
-                                                                                                      db.query(
-                                                                                                          sql,
-                                                                                                              [
-                                                                                                                    news.title,
-                                                                                                                          news.content,
-                                                                                                                                news.image || null,
-                                                                                                                                      slug,
-                                                                                                                                          ],
-                                                                                                                                              callback
-                                                                                                                                                );
-                                                                                                                                                };
+  db.query(sql, [news.title, news.content, news.image || null, slug], callback);
+};
 
-                                                                                                                                                const deleteNews = (slug, callback) => {
-                                                                                                                                                  const sql = "DELETE FROM news WHERE slug = ?";
+const deleteNews = (slug, callback) => {
+  const sql = "DELETE FROM news WHERE slug = ?";
 
-                                                                                                                                                    db.query(sql, [slug], callback);
-                                                                                                                                                    };
+  db.query(sql, [slug], callback);
+};
 
-
-                  module.exports = {
-                      getAllNews,
-                        getNewsBySlug,
-                          createNews,
-                            updateNews,
-                              deleteNews,
-                              };
-                  
+module.exports = {
+  getAllNews,
+  getNewsBySlug,
+  createNews,
+  updateNews,
+  deleteNews,
+};

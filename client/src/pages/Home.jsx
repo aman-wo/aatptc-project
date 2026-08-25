@@ -9,24 +9,24 @@ import ContactCTA from "../components/home/ContactCTA";
 
 function Home() {
   return (
-      <>
-            <Hero />
+    <>
+      <Hero />
 
-                  <AboutPreview />
+      <AboutPreview />
 
-                        <DepartmentsPreview />
+      <DepartmentsPreview />
 
-                              <ProgramsPreview />
+      <ProgramsPreview />
 
-                                    <LatestNews />
+      <LatestNews />
 
-                                          <UpcomingEvents />
+      <UpcomingEvents />
 
-                                                <GalleryPreview />
+      <GalleryPreview />
 
-                                                      <ContactCTA />
-                                                          </>
-                                                            );
-                                                            }
+      <ContactCTA />
+    </>
+  );
+}
 
-                                                            export default Home;
+export default Home;

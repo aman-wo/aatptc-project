@@ -4,87 +4,77 @@ import DownloadCard from "../components/downloads/DownloadCard";
 
 const Downloads = () => {
   const [downloads, setDownloads] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            const fetchDownloads = async () => {
-                  try {
-                          const response = await api.get("/downloads");
+  useEffect(() => {
+    const fetchDownloads = async () => {
+      try {
+        const response = await api.get("/downloads");
 
-                                  setDownloads(response.data.data);
-                                        } catch (err) {
-                                                console.error(err);
-                                                        setError("Failed to load downloads.");
-                                                              } finally {
-                                                                      setLoading(false);
-                                                                            }
-                                                                                };
+        setDownloads(response.data.data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load downloads.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                                                                                    fetchDownloads();
-                                                                                      }, []);
+    fetchDownloads();
+  }, []);
 
-                                                                                        if (loading) {
-                                                                                            return (
-                                                                                                  <section className="section downloads-page">
-                                                                                                          <div className="container">
-                                                                                                                    <div className="section-heading">
-                                                                                                                                <p className="section-subtitle">Resources</p>
-                                                                                                                                            <h2>Downloads</h2>
-                                                                                                                                                        <p>Loading downloads...</p>
-                                                                                                                                                                  </div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                                </section>
-                                                                                                                                                                                    );
-                                                                                                                                                                                      }
+  if (loading) {
+    return (
+      <section className="section downloads-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Resources</p>
+            <h2>Downloads</h2>
+            <p>Loading downloads...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                        if (error) {
-                                                                                                                                                                                            return (
-                                                                                                                                                                                                  <section className="section downloads-page">
-                                                                                                                                                                                                          <div className="container">
-                                                                                                                                                                                                                    <div className="section-heading">
-                                                                                                                                                                                                                                <p className="section-subtitle">Resources</p>
-                                                                                                                                                                                                                                            <h2>Downloads</h2>
-                                                                                                                                                                                                                                                        <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                                      }
+  if (error) {
+    return (
+      <section className="section downloads-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Resources</p>
+            <h2>Downloads</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                        return (
-                                                                                                                                                                                                                                                                                            <section className="section downloads-page">
-                                                                                                                                                                                                                                                                                                  <div className="container">
+  return (
+    <section className="section downloads-page">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Resources</p>
 
-                                                                                                                                                                                                                                                                                                          <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                    <p className="section-subtitle">Resources</p>
+          <h2>Downloads</h2>
 
-                                                                                                                                                                                                                                                                                                                              <h2>Downloads</h2>
+          <p>Access useful documents and resources provided by AATPTC.</p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                                                                                    Access useful documents and resources provided
-                                                                                                                                                                                                                                                                                                                                                                by AATPTC.
-                                                                                                                                                                                                                                                                                                                                                                          </p>
-                                                                                                                                                                                                                                                                                                                                                                                  </div>
+        {downloads.length === 0 ? (
+          <p className="empty-message">No downloads available.</p>
+        ) : (
+          <div className="downloads-grid">
+            {downloads.map((item) => (
+              <DownloadCard key={item.id} item={item} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
 
-                                                                                                                                                                                                                                                                                                                                                                                          {downloads.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                                    <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                                No downloads available.
-                                                                                                                                                                                                                                                                                                                                                                                                                          </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                  ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <div className="downloads-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        {downloads.map((item) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <DownloadCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      key={item.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      item={item}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              };
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              export default Downloads;
+export default Downloads;

@@ -7,41 +7,30 @@ const uploadGallery = createUpload("gallery");
 
 const {
   getGalleries,
-    getSingleGallery,
-      createGallery,
-        updateGallery,
-          deleteGallery
-          } = require("../controllers/galleryController");
+  getSingleGallery,
+  createGallery,
+  updateGallery,
+  deleteGallery,
+} = require("../controllers/galleryController");
 
-          const verifyToken = require("../middleware/authMiddleware");
-          const isAdmin = require("../middleware/adminMiddleware");
+const verifyToken = require("../middleware/authMiddleware");
+const isAdmin = require("../middleware/adminMiddleware");
 
-          router.get("/", getGalleries);
+router.get("/", getGalleries);
 
-          router.get("/:id", getSingleGallery);
+router.get("/:id", getSingleGallery);
 
-          router.post(
-            "/",
-              verifyToken,
-                isAdmin,
-                  uploadGallery.single("image"),
-                    validateGallery,
-                      createGallery
-                      );
+router.post(
+  "/",
+  verifyToken,
+  isAdmin,
+  uploadGallery.single("image"),
+  validateGallery,
+  createGallery,
+);
 
-                      router.put(
-                        "/:id",
-                          verifyToken,
-                            isAdmin,
-                              validateGallery,
-                                updateGallery
-                                );
+router.put("/:id", verifyToken, isAdmin, validateGallery, updateGallery);
 
-                                router.delete(
-                                  "/:id",
-                                    verifyToken,
-                                      isAdmin,
-                                        deleteGallery
-                                        );
+router.delete("/:id", verifyToken, isAdmin, deleteGallery);
 
-                                        module.exports = router;
+module.exports = router;

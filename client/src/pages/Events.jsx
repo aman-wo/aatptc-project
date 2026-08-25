@@ -4,88 +4,77 @@ import EventCard from "../components/events/EventCard";
 
 function Events() {
   const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            api.get("/events")
-                  .then((response) => {
-                          setEvents(
-                                    Array.isArray(response.data)
-                                                ? response.data
-                                                            : response.data.data
-                                                                    );
+  useEffect(() => {
+    api
+      .get("/events")
+      .then((response) => {
+        setEvents(
+          Array.isArray(response.data) ? response.data : response.data.data,
+        );
 
-                                                                            setLoading(false);
-                                                                                  })
-                                                                                        .catch((error) => {
-                                                                                                console.error(error);
-                                                                                                        setError("Unable to load events.");
-                                                                                                                setLoading(false);
-                                                                                                                      });
-                                                                                                                        }, []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("Unable to load events.");
+        setLoading(false);
+      });
+  }, []);
 
-                                                                                                                          if (loading) {
-                                                                                                                              return (
-                                                                                                                                    <section className="section events-page">
-                                                                                                                                            <div className="container">
-                                                                                                                                                      <div className="section-heading">
-                                                                                                                                                                  <p className="section-subtitle">What's Happening</p>
-                                                                                                                                                                              <h2>Upcoming Events</h2>
-                                                                                                                                                                                          <p>Loading events...</p>
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                  </section>
-                                                                                                                                                                                                                      );
-                                                                                                                                                                                                                        }
+  if (loading) {
+    return (
+      <section className="section events-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">What's Happening</p>
+            <h2>Upcoming Events</h2>
+            <p>Loading events...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                          if (error) {
-                                                                                                                                                                                                                              return (
-                                                                                                                                                                                                                                    <section className="section events-page">
-                                                                                                                                                                                                                                            <div className="container">
-                                                                                                                                                                                                                                                      <div className="section-heading">
-                                                                                                                                                                                                                                                                  <p className="section-subtitle">What's Happening</p>
-                                                                                                                                                                                                                                                                              <h2>Upcoming Events</h2>
-                                                                                                                                                                                                                                                                                          <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                  </section>
-                                                                                                                                                                                                                                                                                                                      );
-                                                                                                                                                                                                                                                                                                                        }
+  if (error) {
+    return (
+      <section className="section events-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">What's Happening</p>
+            <h2>Upcoming Events</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                                                          return (
-                                                                                                                                                                                                                                                                                                                              <section className="section events-page">
-                                                                                                                                                                                                                                                                                                                                    <div className="container">
+  return (
+    <section className="section events-page">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">What's Happening</p>
 
-                                                                                                                                                                                                                                                                                                                                            <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                                                      <p className="section-subtitle">What's Happening</p>
+          <h2>Upcoming Events</h2>
 
-                                                                                                                                                                                                                                                                                                                                                                <h2>Upcoming Events</h2>
+          <p>Stay informed about important events and activities at AATPTC.</p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                                                          <p>
-                                                                                                                                                                                                                                                                                                                                                                                      Stay informed about important events and activities
-                                                                                                                                                                                                                                                                                                                                                                                                  at AATPTC.
-                                                                                                                                                                                                                                                                                                                                                                                                            </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+        {events.length === 0 ? (
+          <p className="empty-message">No events available.</p>
+        ) : (
+          <div className="events-grid">
+            {events.map((item) => (
+              <EventCard key={item.id} event={item} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                            {events.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                                                                      <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  No events available.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <div className="events-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {events.map((item) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <EventCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        key={item.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        event={item}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                export default Events;
+export default Events;

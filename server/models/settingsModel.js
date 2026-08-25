@@ -1,21 +1,17 @@
 const db = require("../config/database");
 
-
 const getSettings = (callback) => {
-
-        const sql = `
+  const sql = `
                 SELECT *
                         FROM settings
                                 LIMIT 1
                                     `;
 
-                                        db.query(sql, callback);
-
-                                        };
+  db.query(sql, callback);
+};
 
 const updateSettings = (settings, callback) => {
-
-            const sql = `
+  const sql = `
                     UPDATE settings
                             SET
                                         college_name = ?,
@@ -31,23 +27,20 @@ const updateSettings = (settings, callback) => {
                                                                                                                                                             WHERE id = 1
                                                                                                                                                                 `;
 
-                                                                                                                                                                    const values = [
-                                                                                                                                                                            settings.college_name,
-                                                                                                                                                                                    settings.logo,
-                                                                                                                                                                                            settings.favicon,
-                                                                                                                                                                                                    settings.email,
-                                                                                                                                                                                                            settings.phone,
-                                                                                                                                                                                                                    settings.address,
-                                                                                                                                                                                                                            settings.facebook,
-                                                                                                                                                                                                                                    settings.telegram,
-                                                                                                                                                                                                                                            settings.youtube,
-                                                                                                                                                                                                                                                    settings.footer_text
-                                                                                                                                                                                                                                                        ];
+  const values = [
+    settings.college_name,
+    settings.logo,
+    settings.favicon,
+    settings.email,
+    settings.phone,
+    settings.address,
+    settings.facebook,
+    settings.telegram,
+    settings.youtube,
+    settings.footer_text,
+  ];
 
-                                                                                                                                                                                                                                                            db.query(sql, values, callback);
+  db.query(sql, values, callback);
+};
 
-                                                                                                                                                                                                                                                            };
-
-                                
-
-                            module.exports = {getSettings, updateSettings};
+module.exports = { getSettings, updateSettings };

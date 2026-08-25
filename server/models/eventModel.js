@@ -7,25 +7,21 @@ const getAllEvents = (callback) => {
               ORDER BY start_date DESC
                 `;
 
-                  db.query(sql, callback);
-                  };
+  db.query(sql, callback);
+};
 
 const getEventBySlug = (slug, callback) => {
-
-    const sql = `
+  const sql = `
         SELECT *
             FROM events
                 WHERE slug = ?
                   `;
 
-                    db.query(sql, [slug], callback);
+  db.query(sql, [slug], callback);
+};
 
-                    };
-
-
-  const createEvent = (event, callback)=>{
-
-    const sql = `
+const createEvent = (event, callback) => {
+  const sql = `
     INSERT INTO events
     (
     title,
@@ -42,29 +38,26 @@ const getEventBySlug = (slug, callback) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    db.query(
+  db.query(
     sql,
     [
-    event.title,
-    event.slug,
-    event.description,
-    event.start_date,
-    event.end_date,
-    event.location,
-    event.organizer,
-    event.registration_link,
-    event.image || null,
-    event.status
+      event.title,
+      event.slug,
+      event.description,
+      event.start_date,
+      event.end_date,
+      event.location,
+      event.organizer,
+      event.registration_link,
+      event.image || null,
+      event.status,
     ],
-    callback
-    );
+    callback,
+  );
+};
 
-    };
-  
-                
-
-    const updateEvent = (slug, event, callback) => {
-        const sql = `
+const updateEvent = (slug, event, callback) => {
+  const sql = `
             UPDATE events
                 SET
                       title = ?,
@@ -79,35 +72,34 @@ const getEventBySlug = (slug, callback) => {
                                                                           WHERE slug = ?
                                                                             `;
 
-                                                                              db.query(
-                                                                                  sql,
-                                                                                      [
-                                                                                            event.title,
-                                                                                                  event.description,
-                                                                                                        event.start_date,
-                                                                                                              event.end_date,
-                                                                                                                    event.location,
-                                                                                                                          event.organizer,
-                                                                                                                                event.registration_link,
-                                                                                                                                      event.image || null,
-                                                                                                                                            event.status,
-                                                                                                                                                  slug,
-                                                                                                                                                      ],
-                                                                                                                                                          callback
-                                                                                                                                                            );
-                                                                                                                                                            };
+  db.query(
+    sql,
+    [
+      event.title,
+      event.description,
+      event.start_date,
+      event.end_date,
+      event.location,
+      event.organizer,
+      event.registration_link,
+      event.image || null,
+      event.status,
+      slug,
+    ],
+    callback,
+  );
+};
 
-                                                                                                                                                            const deleteEvent = (slug, callback) => {
-                                                                                                                                                              const sql = "DELETE FROM events WHERE slug = ?";
+const deleteEvent = (slug, callback) => {
+  const sql = "DELETE FROM events WHERE slug = ?";
 
-                                                                                                                                                                db.query(sql, [slug], callback);
-                                                                                                                                                                };
+  db.query(sql, [slug], callback);
+};
 
-                                                                  
-    
-                    module.exports = {
-                        getAllEvents,
-                          getEventBySlug,
-                            createEvent, updateEvent, deleteEvent
-                            };
-                    
+module.exports = {
+  getAllEvents,
+  getEventBySlug,
+  createEvent,
+  updateEvent,
+  deleteEvent,
+};

@@ -4,18 +4,18 @@ import AdminSidebar from "./AdminSidebar";
 
 function AdminLayout() {
   return (
-      <div className="admin-layout">
-            <AdminHeader />
+    <div className="admin-layout">
+      <AdminHeader />
 
-                  <div className="admin-body">
-                          <AdminSidebar />
+      <div className="admin-body">
+        <AdminSidebar />
 
-                                  <main className="admin-main">
-                                            <Outlet />
-                                                    </main>
-                                                          </div>
-                                                              </div>
-                                                                );
-                                                                }
+        <main className="admin-main">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}
 
-                                                                export default AdminLayout;
+export default AdminLayout;

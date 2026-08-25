@@ -2,124 +2,122 @@ const downloads = require("../models/downloadModel");
 
 const getDownloads = (req, res) => {
   downloads.getAllDownloads((err, results) => {
-      if (err) {
-            return res.status(500).json({
-                    success: false,
-                            message: err.message,
-                                  });
-                                      }
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                          res.json({
-                                                success: true,
-                                                      count: results.length,
-                                                            data: results,
-                                                                });
-                                                                  });
-                                                                  };
+    res.json({
+      success: true,
+      count: results.length,
+      data: results,
+    });
+  });
+};
 
-                                                                  const getSingleDownload = (req, res) => {
-                                                                    const { id } = req.params;
+const getSingleDownload = (req, res) => {
+  const { id } = req.params;
 
-                                                                      downloads.getDownloadById(id, (err, results) => {
-                                                                          if (err) {
-                                                                                return res.status(500).json({
-                                                                                        success: false,
-                                                                                                message: err.message,
-                                                                                                      });
-                                                                                                          }
+  downloads.getDownloadById(id, (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                              if (results.length === 0) {
-                                                                                                                    return res.status(404).json({
-                                                                                                                            success: false,
-                                                                                                                                    message: "file not found",
-                                                                                                                                          });
-                                                                                                                                              }
+    if (results.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "file not found",
+      });
+    }
 
-                                                                                                                                                  res.json({
-                                                                                                                                                        success: true,
-                                                                                                                                                              data: results[0],
-                                                                                                                                                                  });
-                                                                                                                                                                    });
-                                                                                                                                                                    };
+    res.json({
+      success: true,
+      data: results[0],
+    });
+  });
+};
 
-                                                                                                                                                                    const createDownload = (req, res) => {
-                                                                                                                                                                
-                                                                                                                                                                                const downloadData = {
-                                                                                                                                                                                    ...req.body,
-                                                                                                                                                                                        file_name: req.file ? req.file.filename : null,
-                                                                                                                                                                                          };
+const createDownload = (req, res) => {
+  const downloadData = {
+    ...req.body,
+    file_name: req.file ? req.file.filename : null,
+  };
 
-                                                                                                                                                                                            downloads.createDownload(downloadData, (err, result) => {
-                                                                                                                                                                                                if (err) {
-                                                                                                                                                                                                      return res.status(500).json({
-                                                                                                                                                                                                              success: false,
-                                                                                                                                                                                                                      message: err.message,
-                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                }
+  downloads.createDownload(downloadData, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                    res.status(201).json({
-                                                                                                                                                                                                                                          success: true,
-                                                                                                                                                                                                                                                message: "Download file created successfully",
-                                                                                                                                                                                                                                                      id: result.insertId,
-                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                                            };
-                                                                                                                                                                        
+    res.status(201).json({
+      success: true,
+      message: "Download file created successfully",
+      id: result.insertId,
+    });
+  });
+};
 
-                                                                                                                                                                                                                                      const updateDownload = (req, res) => {
-                                                                                                                                                                                                                                        const { id } = req.params;
+const updateDownload = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                          downloads.updateDownload(id, req.body, (err, result) => {
-                                                                                                                                                                                                                                              if (err) {
-                                                                                                                                                                                                                                                    return res.status(500).json({
-                                                                                                                                                                                                                                                            success: false,
-                                                                                                                                                                                                                                                                    message: err.message,
-                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                              }
+  downloads.updateDownload(id, req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                  if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                        return res.status(404).json({
-                                                                                                                                                                                                                                                                                                success: false,
-                                                                                                                                                                                                                                                                                                        message: "file not found",
-                                                                                                                                                                                                                                                                                                              });
-                                                                                                                                                                                                                                                                                                                  }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "file not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                      res.json({
-                                                                                                                                                                                                                                                                                                                            success: true,
-                                                                                                                                                                                                                                                                                                                                  message: "file updated successfully",
-                                                                                                                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                        };
+    res.json({
+      success: true,
+      message: "file updated successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                        const deleteDownload = (req, res) => {
-                                                                                                                                                                                                                                                                                                                                          const { id } = req.params;
+const deleteDownload = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                                                                                                                            downloads.deleteDownload(id, (err, result) => {
-                                                                                                                                                                                                                                                                                                                                                if (err) {
-                                                                                                                                                                                                                                                                                                                                                      return res.status(500).json({
-                                                                                                                                                                                                                                                                                                                                                              success: false,
-                                                                                                                                                                                                                                                                                                                                                                      message: err.message,
-                                                                                                                                                                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                                                                                                                                                                }
+  downloads.deleteDownload(id, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                    if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                                                                                                                          return res.status(404).json({
-                                                                                                                                                                                                                                                                                                                                                                                                  success: false,
-                                                                                                                                                                                                                                                                                                                                                                                                          message: "file not found",
-                                                                                                                                                                                                                                                                                                                                                                                                                });
-                                                                                                                                                                                                                                                                                                                                                                                                                    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "file not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        res.json({
-                                                                                                                                                                                                                                                                                                                                                                                                                              success: true,
-                                                                                                                                                                                                                                                                                                                                                                                                                                    message: "file deleted successfully",
-                                                                                                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          };
+    res.json({
+      success: true,
+      message: "file deleted successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                          module.exports = {
-                                                                                                                                                                                                                                                                                                                                                                                                                                            getDownloads,
-                                                                                                                                                                                                                                                                                                                                                                                                                                              getSingleDownload,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                createDownload,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  updateDownload,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    deleteDownload,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    };
+module.exports = {
+  getDownloads,
+  getSingleDownload,
+  createDownload,
+  updateDownload,
+  deleteDownload,
+};

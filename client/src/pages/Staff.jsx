@@ -4,87 +4,80 @@ import StaffCard from "../components/staff/StaffCard";
 
 const Staff = () => {
   const [staff, setStaff] = useState([]);
-    const [loading, setLoading] = useState(true);
-      const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-        useEffect(() => {
-            const fetchStaff = async () => {
-                  try {
-                          const response = await api.get("/staff");
+  useEffect(() => {
+    const fetchStaff = async () => {
+      try {
+        const response = await api.get("/staff");
 
-                                  setStaff(response.data.data);
-                                        } catch (err) {
-                                                console.error(err);
-                                                        setError("Failed to load staff.");
-                                                              } finally {
-                                                                      setLoading(false);
-                                                                            }
-                                                                                };
+        setStaff(response.data.data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load staff.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                                                                                    fetchStaff();
-                                                                                      }, []);
+    fetchStaff();
+  }, []);
 
-                                                                                        if (loading) {
-                                                                                            return (
-                                                                                                  <section className="section staff-page">
-                                                                                                          <div className="container">
-                                                                                                                    <div className="section-heading">
-                                                                                                                                <p className="section-subtitle">Our People</p>
-                                                                                                                                            <h2>Our Staff</h2>
-                                                                                                                                                        <p>Loading staff...</p>
-                                                                                                                                                                  </div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                                </section>
-                                                                                                                                                                                    );
-                                                                                                                                                                                      }
+  if (loading) {
+    return (
+      <section className="section staff-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Our People</p>
+            <h2>Our Staff</h2>
+            <p>Loading staff...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                        if (error) {
-                                                                                                                                                                                            return (
-                                                                                                                                                                                                  <section className="section staff-page">
-                                                                                                                                                                                                          <div className="container">
-                                                                                                                                                                                                                    <div className="section-heading">
-                                                                                                                                                                                                                                <p className="section-subtitle">Our People</p>
-                                                                                                                                                                                                                                            <h2>Our Staff</h2>
-                                                                                                                                                                                                                                                        <p className="error-message">{error}</p>
-                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                                      }
+  if (error) {
+    return (
+      <section className="section staff-page">
+        <div className="container">
+          <div className="section-heading">
+            <p className="section-subtitle">Our People</p>
+            <h2>Our Staff</h2>
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                                                                                                                                                                                                                                                                                        return (
-                                                                                                                                                                                                                                                                                            <section className="section staff-page">
-                                                                                                                                                                                                                                                                                                  <div className="container">
+  return (
+    <section className="section staff-page">
+      <div className="container">
+        <div className="section-heading">
+          <p className="section-subtitle">Our People</p>
 
-                                                                                                                                                                                                                                                                                                          <div className="section-heading">
-                                                                                                                                                                                                                                                                                                                    <p className="section-subtitle">Our People</p>
+          <h2>Our Staff</h2>
 
-                                                                                                                                                                                                                                                                                                                              <h2>Our Staff</h2>
+          <p>
+            Meet the staff members who support teaching, training, and college
+            services.
+          </p>
+        </div>
 
-                                                                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                                                                                    Meet the staff members who support teaching,
-                                                                                                                                                                                                                                                                                                                                                                training, and college services.
-                                                                                                                                                                                                                                                                                                                                                                          </p>
-                                                                                                                                                                                                                                                                                                                                                                                  </div>
+        {staff.length === 0 ? (
+          <p className="empty-message">No staff members found.</p>
+        ) : (
+          <div className="staff-grid">
+            {staff.map((member) => (
+              <StaffCard key={member.id} staff={member} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
 
-                                                                                                                                                                                                                                                                                                                                                                                          {staff.length === 0 ? (
-                                                                                                                                                                                                                                                                                                                                                                                                    <p className="empty-message">
-                                                                                                                                                                                                                                                                                                                                                                                                                No staff members found.
-                                                                                                                                                                                                                                                                                                                                                                                                                          </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                  ) : (
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <div className="staff-grid">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        {staff.map((member) => (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <StaffCard
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      key={member.id}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      staff={member}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  )}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              };
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              export default Staff;
+export default Staff;

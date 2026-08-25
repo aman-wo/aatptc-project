@@ -3,96 +3,87 @@ import api from "../../services/api";
 
 function ContactsManagement() {
   const [contacts, setContacts] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-      const fetchContacts = async () => {
-          try {
-                const response = await api.get("/contacts");
-                      setContacts(response.data.data || response.data);
-                          } catch (error) {
-                                console.error(
-                                        "Failed to load contacts:",
-                                                error.response?.data || error
-                                                      );
-                                                          } finally {
-                                                                setLoading(false);
-                                                                    }
-                                                                      };
+  const fetchContacts = async () => {
+    try {
+      const response = await api.get("/contacts");
+      setContacts(response.data.data || response.data);
+    } catch (error) {
+      console.error("Failed to load contacts:", error.response?.data || error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                                                                        useEffect(() => {
-                                                                            fetchContacts();
-                                                                              }, []);
+  useEffect(() => {
+    fetchContacts();
+  }, []);
 
-                                                                                const handleDelete = async (id) => {
-                                                                                    if (!window.confirm("Are you sure you want to delete this message?")) {
-                                                                                          return;
-                                                                                              }
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this message?")) {
+      return;
+    }
 
-                                                                                                  try {
-                                                                                                        await api.delete(`/contacts/${id}`);
-                                                                                                              await fetchContacts();
-                                                                                                                  } catch (error) {
-                                                                                                                        console.error(
-                                                                                                                                "Failed to delete contact:",
-                                                                                                                                        error.response?.data || error
-                                                                                                                                              );
-                                                                                                                                                  }
-                                                                                                                                                    };
+    try {
+      await api.delete(`/contacts/${id}`);
+      await fetchContacts();
+    } catch (error) {
+      console.error("Failed to delete contact:", error.response?.data || error);
+    }
+  };
 
-                                                                                                                                                      if (loading) {
-                                                                                                                                                          return <p>Loading contacts...</p>;
-                                                                                                                                                            }
+  if (loading) {
+    return <p>Loading contacts...</p>;
+  }
 
-                                                                                                                                                              return (
-                                                                                                                                                                  <div className="admin-contacts">
-                                                                                                                                                                        <h2>Contact Messages</h2>
+  return (
+    <div className="admin-contacts">
+      <h2>Contact Messages</h2>
 
-                                                                                                                                                                              {contacts.length === 0 ? (
-                                                                                                                                                                                      <p>No contact messages found.</p>
-                                                                                                                                                                                            ) : (
-                                                                                                                                                                                                    <div>
-                                                                                                                                                                                                              {contacts.map((contact) => (
-                                                                                                                                                                                                                          <div key={contact.id}>
-                                                                                                                                                                                                                                        <h3>{contact.subject}</h3>
+      {contacts.length === 0 ? (
+        <p>No contact messages found.</p>
+      ) : (
+        <div>
+          {contacts.map((contact) => (
+            <div key={contact.id}>
+              <h3>{contact.subject}</h3>
 
-                                                                                                                                                                                                                                                      <p>
-                                                                                                                                                                                                                                                                      <strong>Name:</strong> {contact.full_name}
-                                                                                                                                                                                                                                                                                    </p>
+              <p>
+                <strong>Name:</strong> {contact.full_name}
+              </p>
 
-                                                                                                                                                                                                                                                                                                  <p>
-                                                                                                                                                                                                                                                                                                                  <strong>Email:</strong> {contact.email}
-                                                                                                                                                                                                                                                                                                                                </p>
+              <p>
+                <strong>Email:</strong> {contact.email}
+              </p>
 
-                                                                                                                                                                                                                                                                                                                                              <p>
-                                                                                                                                                                                                                                                                                                                                                              <strong>Phone:</strong> {contact.phone || "N/A"}
-                                                                                                                                                                                                                                                                                                                                                                            </p>
+              <p>
+                <strong>Phone:</strong> {contact.phone || "N/A"}
+              </p>
 
-                                                                                                                                                                                                                                                                                                                                                                                          <p>
-                                                                                                                                                                                                                                                                                                                                                                                                          <strong>Message:</strong>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </p>
+              <p>
+                <strong>Message:</strong>
+              </p>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                      <p>{contact.message}</p>
+              <p>{contact.message}</p>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    <p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <strong>Status:</strong>{" "}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    {contact.is_read ? "Read" : "Unread"}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </p>
+              <p>
+                <strong>Status:</strong> {contact.is_read ? "Read" : "Unread"}
+              </p>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <strong>Date:</strong> {contact.created_at}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </p>
+              <p>
+                <strong>Date:</strong> {contact.created_at}
+              </p>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <button onClick={() => handleDelete(contact.id)}>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Delete
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </button>
+              <button onClick={() => handleDelete(contact.id)}>Delete</button>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <hr />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ))}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            )}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  }
+              <hr />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  export default ContactsManagement;
+export default ContactsManagement;

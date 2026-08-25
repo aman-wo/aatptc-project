@@ -11,11 +11,11 @@ const getAllPrograms = (callback) => {
                                     ORDER BY programs.name ASC
                                       `;
 
-                                        db.query(sql, callback);
-                                        };
+  db.query(sql, callback);
+};
 
 const getProgramBySlug = (slug, callback) => {
-    const sql = `
+  const sql = `
         SELECT
               programs.*,
                     departments.name AS department_name
@@ -25,11 +25,11 @@ const getProgramBySlug = (slug, callback) => {
                                       WHERE programs.slug = ?
                                         `;
 
-                                          db.query(sql, [slug], callback);
-                                          };
+  db.query(sql, [slug], callback);
+};
 
 const createProgram = (program, callback) => {
-    const sql = `
+  const sql = `
         INSERT INTO programs
             (
                   department_id,
@@ -43,24 +43,23 @@ const createProgram = (program, callback) => {
                                                               VALUES (?, ?, ?, ?, ?, ?, ?)
                                                                 `;
 
-                                                                  db.query(
-                                                                      sql,
-                                                                          [
-                                                                                program.department_id,
-                                                                                      program.name,
-                                                                                            program.slug,
-                                                                                                  program.description,
-                                                                                                        program.duration,
-                                                                                                              program.level,
-                                                                                                                    program.image || null,
-                                                                                                                        ],
-                                                                                                                            callback
-                                                                                                                              );
-                                                                                                                              };
-
+  db.query(
+    sql,
+    [
+      program.department_id,
+      program.name,
+      program.slug,
+      program.description,
+      program.duration,
+      program.level,
+      program.image || null,
+    ],
+    callback,
+  );
+};
 
 const updateProgram = (slug, program, callback) => {
-        const sql = `
+  const sql = `
             UPDATE programs
                 SET
                       department_id = ?,
@@ -72,35 +71,34 @@ const updateProgram = (slug, program, callback) => {
                                                         WHERE slug = ?
                                                           `;
 
-                                                            db.query(
-                                                                sql,
-                                                                    [
-                                                                          program.department_id,
-                                                                                program.name,
-                                                                                      program.description,
-                                                                                            program.duration,
-                                                                                                  program.level,
-                                                                                                        program.image || null,
-                                                                                                              slug,
-                                                                                                                  ],
-                                                                                                                      callback
-                                                                                                                        );
-                                                                                                                        };
+  db.query(
+    sql,
+    [
+      program.department_id,
+      program.name,
+      program.description,
+      program.duration,
+      program.level,
+      program.image || null,
+      slug,
+    ],
+    callback,
+  );
+};
 
 const deleteProgram = (slug, callback) => {
-
-        const sql = `
+  const sql = `
             DELETE FROM programs
                 WHERE slug = ?
                   `;
 
-                    db.query(sql, [slug], callback);
+  db.query(sql, [slug], callback);
+};
 
-                    };
-
-
-                                        module.exports = {
-                                            getAllPrograms,
-                                              getProgramBySlug, createProgram, updateProgram, deleteProgram
-                                              };
-                                        
+module.exports = {
+  getAllPrograms,
+  getProgramBySlug,
+  createProgram,
+  updateProgram,
+  deleteProgram,
+};

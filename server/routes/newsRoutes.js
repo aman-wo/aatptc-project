@@ -5,44 +5,32 @@ const uploadNews = createUpload("news");
 
 const {
   getNews,
-    getSingleNews,
-      createNews,
-        updateNews,
-          deleteNews,
-          } = require("../controllers/newsController");
+  getSingleNews,
+  createNews,
+  updateNews,
+  deleteNews,
+} = require("../controllers/newsController");
 
-          const verifyToken = require("../middleware/authMiddleware");
-          const isAdmin = require("../middleware/adminMiddleware");
-          const validateNews = require("../validation/newsValidation");
-          const upload = require("../middleware/uploadMiddleware");
+const verifyToken = require("../middleware/authMiddleware");
+const isAdmin = require("../middleware/adminMiddleware");
+const validateNews = require("../validation/newsValidation");
+const upload = require("../middleware/uploadMiddleware");
 
+router.get("/", getNews);
 
-          router.get("/", getNews);
+router.get("/:slug", getSingleNews);
 
-          router.get("/:slug", getSingleNews);
+router.post(
+  "/",
+  verifyToken,
+  isAdmin,
+  uploadNews.single("image"),
+  validateNews,
+  createNews,
+);
 
-          router.post(
-            "/",
-              verifyToken,
-                isAdmin,
-                uploadNews.single("image"),
-                  validateNews,
-                    createNews
-                    );
+router.put("/:slug", verifyToken, isAdmin, validateNews, updateNews);
 
-                    router.put(
-                      "/:slug",
-                        verifyToken,
-                          isAdmin,
-                            validateNews,
-                              updateNews
-                              );
+router.delete("/:slug", verifyToken, isAdmin, deleteNews);
 
-                              router.delete(
-                                "/:slug",
-                                  verifyToken,
-                                    isAdmin,
-                                      deleteNews
-                                      );
-
-                                      module.exports = router;
+module.exports = router;

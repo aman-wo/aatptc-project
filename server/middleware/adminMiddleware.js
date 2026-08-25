@@ -1,12 +1,12 @@
 const isAdmin = (req, res, next) => {
-      if (req.admin.role !== "admin" && req.admin.role !== "super_admin") {
-          return res.status(403).json({
-                success: false,
-                      message: "Access denied. Admin only."
-                          });
-                            }
+  if (req.admin.role !== "admin" && req.admin.role !== "super_admin") {
+    return res.status(403).json({
+      success: false,
+      message: "Access denied. Admin only.",
+    });
+  }
 
-                              next();
-                              };
+  next();
+};
 
-                              module.exports = isAdmin;
+module.exports = isAdmin;

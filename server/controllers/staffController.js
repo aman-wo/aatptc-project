@@ -2,123 +2,122 @@ const Staff = require("../models/staffModel");
 
 const getStaff = (req, res) => {
   Staff.getAllStaff((err, results) => {
-      if (err) {
-            return res.status(500).json({
-                    success: false,
-                            message: err.message,
-                                  });
-                                      }
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                          res.json({
-                                                success: true,
-                                                      count: results.length,
-                                                            data: results,
-                                                                });
-                                                                  });
-                                                                  };
+    res.json({
+      success: true,
+      count: results.length,
+      data: results,
+    });
+  });
+};
 
-                                                                  const getSingleStaff = (req, res) => {
-                                                                    const { id } = req.params;
+const getSingleStaff = (req, res) => {
+  const { id } = req.params;
 
-                                                                      Staff.getStaffById(id, (err, results) => {
-                                                                          if (err) {
-                                                                                return res.status(500).json({
-                                                                                        success: false,
-                                                                                                message: err.message,
-                                                                                                      });
-                                                                                                          }
+  Staff.getStaffById(id, (err, results) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                              if (results.length === 0) {
-                                                                                                                    return res.status(404).json({
-                                                                                                                            success: false,
-                                                                                                                                    message: "Staff member not found",
-                                                                                                                                          });
-                                                                                                                                              }
+    if (results.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff member not found",
+      });
+    }
 
-                                                                                                                                                  res.json({
-                                                                                                                                                        success: true,
-                                                                                                                                                              data: results[0],
-                                                                                                                                                                  });
-                                                                                                                                                                    });
-                                                                                                                                                                    };
+    res.json({
+      success: true,
+      data: results[0],
+    });
+  });
+};
 
-                                                                                                                                                                    const createStaff = (req, res) => {
-                                                                                                                                                                          const staffData = {
-                                                                                                                                                                              ...req.body,
-                                                                                                                                                                                  image: req.file ? req.file.filename : null,
-                                                                                                                                                                                    };
+const createStaff = (req, res) => {
+  const staffData = {
+    ...req.body,
+    image: req.file ? req.file.filename : null,
+  };
 
-                                                                                                                                                                                      Staff.createStaff(staffData, (err, result) => {
-                                                                                                                                                                                          if (err) {
-                                                                                                                                                                                                return res.status(500).json({
-                                                                                                                                                                                                        success: false,
-                                                                                                                                                                                                                message: err.message,
-                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                          }
+  Staff.createStaff(staffData, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                              res.status(201).json({
-                                                                                                                                                                                                                                    success: true,
-                                                                                                                                                                                                                                          message: "Staff member created successfully",
-                                                                                                                                                                                                                                                id: result.insertId,
-                                                                                                                                                                                                                                                    });
-                                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                                      };
-                                                                                                                                                                    
+    res.status(201).json({
+      success: true,
+      message: "Staff member created successfully",
+      id: result.insertId,
+    });
+  });
+};
 
-                                                                                                                                                                                                                                      const updateStaff = (req, res) => {
-                                                                                                                                                                                                                                        const { id } = req.params;
+const updateStaff = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                          Staff.updateStaff(id, req.body, (err, result) => {
-                                                                                                                                                                                                                                              if (err) {
-                                                                                                                                                                                                                                                    return res.status(500).json({
-                                                                                                                                                                                                                                                            success: false,
-                                                                                                                                                                                                                                                                    message: err.message,
-                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                              }
+  Staff.updateStaff(id, req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                  if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                        return res.status(404).json({
-                                                                                                                                                                                                                                                                                                success: false,
-                                                                                                                                                                                                                                                                                                        message: "Staff member not found",
-                                                                                                                                                                                                                                                                                                              });
-                                                                                                                                                                                                                                                                                                                  }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff member not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                      res.json({
-                                                                                                                                                                                                                                                                                                                            success: true,
-                                                                                                                                                                                                                                                                                                                                  message: "Staff member updated successfully",
-                                                                                                                                                                                                                                                                                                                                      });
-                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                        };
+    res.json({
+      success: true,
+      message: "Staff member updated successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                        const deleteStaff = (req, res) => {
-                                                                                                                                                                                                                                                                                                                                          const { id } = req.params;
+const deleteStaff = (req, res) => {
+  const { id } = req.params;
 
-                                                                                                                                                                                                                                                                                                                                            Staff.deleteStaff(id, (err, result) => {
-                                                                                                                                                                                                                                                                                                                                                if (err) {
-                                                                                                                                                                                                                                                                                                                                                      return res.status(500).json({
-                                                                                                                                                                                                                                                                                                                                                              success: false,
-                                                                                                                                                                                                                                                                                                                                                                      message: err.message,
-                                                                                                                                                                                                                                                                                                                                                                            });
-                                                                                                                                                                                                                                                                                                                                                                                }
+  Staff.deleteStaff(id, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                    if (result.affectedRows === 0) {
-                                                                                                                                                                                                                                                                                                                                                                                          return res.status(404).json({
-                                                                                                                                                                                                                                                                                                                                                                                                  success: false,
-                                                                                                                                                                                                                                                                                                                                                                                                          message: "Staff member not found",
-                                                                                                                                                                                                                                                                                                                                                                                                                });
-                                                                                                                                                                                                                                                                                                                                                                                                                    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff member not found",
+      });
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        res.json({
-                                                                                                                                                                                                                                                                                                                                                                                                                              success: true,
-                                                                                                                                                                                                                                                                                                                                                                                                                                    message: "Staff member deleted successfully",
-                                                                                                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          });
-                                                                                                                                                                                                                                                                                                                                                                                                                                          };
+    res.json({
+      success: true,
+      message: "Staff member deleted successfully",
+    });
+  });
+};
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                          module.exports = {
-                                                                                                                                                                                                                                                                                                                                                                                                                                            getStaff,
-                                                                                                                                                                                                                                                                                                                                                                                                                                              getSingleStaff,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                createStaff,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  updateStaff,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    deleteStaff,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    };
+module.exports = {
+  getStaff,
+  getSingleStaff,
+  createStaff,
+  updateStaff,
+  deleteStaff,
+};

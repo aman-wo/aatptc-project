@@ -1,39 +1,27 @@
 function NewsCard({ news }) {
-          return (
-              <article className="content-card news-card">
+  return (
+    <article className="content-card news-card">
+      {news.image ? (
+        <img
+          className="card-image"
+          src={`${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/news/${news.image}`}
+          alt={news.title}
+        />
+      ) : (
+        <div className="card-image card-image-placeholder">No Image</div>
+      )}
 
-                    {news.image ? (
-                            <img
-                                      className="card-image"
-                                                src={`${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/news/${news.image}`}
-                                                          alt={news.title}
-                                                                  />
-                                                                        ) : (
-                                                                                <div className="card-image card-image-placeholder">
-                                                                                          No Image
-                                                                                                  </div>
-                                                                                                        )}
+      <div className="content-card-body">
+        <h3>{news.title}</h3>
 
-                                                                                                              <div className="content-card-body">
+        <p>{news.content}</p>
 
-                                                                                                                      <h3>{news.title}</h3>
+        <div className="card-meta">
+          <span>{new Date(news.created_at).toLocaleDateString()}</span>
+        </div>
+      </div>
+    </article>
+  );
+}
 
-                                                                                                                              <p>{news.content}</p>
-
-                                                                                                                                      <div className="card-meta">
-                                                                                                                                                <span>
-                                                                                                                                                            {new Date(
-                                                                                                                                                                          news.created_at
-                                                                                                                                                                                      ).toLocaleDateString()}
-                                                                                                                                                                                                </span>
-                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                              </div>
-
-                                                                                                                                                                                                                  </article>
-                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                    }
-
-                                                                                                                                                                                                                    export default NewsCard;
-
-
+export default NewsCard;

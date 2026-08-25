@@ -1,28 +1,19 @@
 function EventCard({ event }) {
-        return (
-            <article className="content-card event-card">
-                  <div className="content-card-body">
+  return (
+    <article className="content-card event-card">
+      <div className="content-card-body">
+        <span className="card-label">Upcoming Event</span>
 
-                          <span className="card-label">
-                                    Upcoming Event
-                                            </span>
+        <h3>{event.title}</h3>
 
-                                                    <h3>{event.title}</h3>
+        <p>{event.description}</p>
 
-                                                            <p>{event.description}</p>
+        <div className="card-meta">
+          <span>Date: {new Date(event.event_date).toLocaleDateString()}</span>
+        </div>
+      </div>
+    </article>
+  );
+}
 
-                                                                    <div className="card-meta">
-                                                                              <span>
-                                                                                          Date:{" "}
-                                                                                                      {new Date(
-                                                                                                                    event.event_date
-                                                                                                                                ).toLocaleDateString()}
-                                                                                                                                          </span>
-                                                                                                                                                  </div>
-
-                                                                                                                                                        </div>
-                                                                                                                                                            </article>
-                                                                                                                                                              );
-                                                                                                                                                              }
-
-                                                                                                                                                              export default EventCard;
+export default EventCard;
