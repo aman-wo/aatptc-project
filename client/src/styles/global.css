@@ -125,11 +125,12 @@ textarea:focus-visible,
 */
 .btn-secondary {
   display: inline-block;
+  align-items: center;
   padding: 12px 24px;
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius);
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--white);
   font-size: 16px;
   font-weight: 600;
   transition: var(--transition);
@@ -344,10 +345,16 @@ textarea:focus-visible,
    ========================================
 */
 .hero {
+  background-image: url("https://raw.githubusercontent.com/aman-wo/Image/refs/heads/main/hero-image.png");
+  /* Ensures the image covers the entire screen beautifully */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: var(--primary-light);
   min-height: 520px;
   display: flex;
   align-items: center;
+  text-align: center;
 }
 .hero-container {
   display: flex;
@@ -355,15 +362,19 @@ textarea:focus-visible,
 }
 .hero-content {
   max-width: 800px;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  margin: auto;
 }
 .hero-subtitle {
-  color: var(--primary-color);
+  color: var(--white);
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 10px;
 }
 .hero-content h1 {
-  color: var(--primary-dark);
+  color: var(--white);
   font-size: 48px;
   line-height: 1.15;
   margin-bottom: 20px;
@@ -376,28 +387,30 @@ textarea:focus-visible,
 }
 .hero-actions {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  gap: 10px;
   flex-wrap: wrap;
 }
 .hero-actions .btn-secondary {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--white);
   border: 2px solid var(--primary-color);
 }
 /* Mobile Hero */
 @media (max-width: 768px) {
   .hero {
     min-height: 450px;
+    
   }
   .hero-content h1 {
-    font-size: 32px;
+    font-size: 30px;
   }
   .hero-description {
     font-size: 16px;
   }
   .hero-actions {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 }
 /* ========================================
