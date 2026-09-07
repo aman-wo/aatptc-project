@@ -1,7 +1,7 @@
 function DepartmentCard({ department, image }) {
   return (
-    <div className="department-card">
-      {image && (
+    <article className="department-card content-card">
+     {image && (
         <img
           src={image}
           alt={department.name}
@@ -9,11 +9,12 @@ function DepartmentCard({ department, image }) {
         />
       )}
 
-      <div className="department-card-content">
+      <div className="department-card-content content-card-body">
+       {/* {image && (<img src={image} alt={department.name} className="card-image"/>)}*/}
         <h3>{department.name}</h3>
         <p>{department.description}</p>
       </div>
-    </div>
+    </article>
   );
 }
 
